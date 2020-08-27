@@ -1,0 +1,26 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Float!
+  username: String!
+  password: String!
+}
+
+type Query {
+  whoAmI: User!
+}
+
+type Mutation {
+  """Returns token after login"""
+  signin(authCredentialsDTO: AuthCredentialsDTO!): String!
+
+  """Creates a User Account"""
+  Signup(authCredentialsDTO: AuthCredentialsDTO!): User!
+}
+
+input AuthCredentialsDTO {
+  username: String!
+  password: String!
+}
