@@ -2,16 +2,19 @@ import {
   Injectable,
   ExecutionContext,
   UnauthorizedException,
-} from '@nestjs/common';
-import { GqlExecutionContext } from '@nestjs/graphql';
-import { AuthGuard } from '@nestjs/passport';
+} from "@nestjs/common";
+import { GqlExecutionContext } from "@nestjs/graphql";
+import { AuthGuard } from "@nestjs/passport";
 
 @Injectable()
-export class GqlAuthGuard extends AuthGuard('jwt') {
+export class GqlAuthGuard extends AuthGuard("jwt") {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   getRequest(context: ExecutionContext) {
+
+    console.log("The Body ");
+    console.log(JSON.stringify(context));
     const ctx = GqlExecutionContext.create(context);
-    // console.log(ctx.getContext().req);
+    console.log(ctx.getContext().req);
     return ctx.getContext().req;
   }
 

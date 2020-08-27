@@ -1,9 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt';
-import { AuthCredentialsDTO } from 'src/authentication/dto/auth.credentials.dto';
-import { AccessToken } from 'src/authentication/interfaces/accesstoken.interface';
-import { JWTPayload } from 'src/authentication/interfaces/jwt.interface';
-import { UserRepository } from 'src/authentication/repositories/user.repository';
+import { Injectable, UnauthorizedException } from "@nestjs/common"
+import { JwtService } from "@nestjs/jwt";
+import { AuthCredentialsDTO } from "src/authentication/dto/auth.credentials.dto";
+import { AccessToken } from "src/authentication/interfaces/accesstoken.interface";
+import { JWTPayload } from "src/authentication/interfaces/jwt.interface";
+import { UserRepository } from "src/authentication/repositories/user.repository";
 @Injectable()
 export class AuthService {
   constructor(
@@ -20,7 +20,7 @@ export class AuthService {
       authCredentialsDTO,
     );
 
-    if (!username) throw new UnauthorizedException('Invalid credentials');
+    if (!username) throw new UnauthorizedException("Invalid credentials");
 
     const payload: JWTPayload = {
       username: username,

@@ -1,12 +1,12 @@
-import { User } from '../entities/user.entity';
-import * as bcrypt from 'bcrypt';
-import { AuthCredentialsDTO } from '../dto/auth.credentials.dto';
+import { User } from "../entities/user.entity";
+import * as bcrypt from "bcrypt";
+import { AuthCredentialsDTO } from "../dto/auth.credentials.dto";
 import {
   ConflictException,
   InternalServerErrorException,
   Injectable,
   Inject,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
 @Injectable()
 export class UserRepository {

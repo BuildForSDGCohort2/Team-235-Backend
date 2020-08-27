@@ -4,16 +4,16 @@ import {
   MinLength,
   MaxLength,
   Matches,
-} from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
-import { InputType, Field } from '@nestjs/graphql';
+} from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+import { InputType, Field } from "@nestjs/graphql";
 
 @InputType()
 export class AuthCredentialsDTO {
   @ApiProperty({
-    name: 'username',
-    description: 'The username for login or signup',
-    type: 'string',
+    name: "username",
+    description: "The username for login or signup",
+    type: "string",
   })
   @IsNotEmpty()
   @IsString()
@@ -23,16 +23,16 @@ export class AuthCredentialsDTO {
   username: string;
 
   @ApiProperty({
-    name: 'password',
-    description: 'The password for login  or signup',
-    type: 'string',
+    name: "password",
+    description: "The password for login  or signup",
+    type: "string",
   })
   @IsNotEmpty()
   @IsString()
   @MinLength(8)
   @MaxLength(20)
   // @Matches(/((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-  //   message: 'Enter a strong Password',
+  //   message: "Enter a strong Password",
   // })
   @Field((type) => String)
   password: string;
