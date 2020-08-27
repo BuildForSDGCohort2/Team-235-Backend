@@ -9,4 +9,4 @@ import * as knexfile from "./knexfile";
         })
     ]
 })
-export class DatabaseModule {}
+export class DatabaseModule { }
