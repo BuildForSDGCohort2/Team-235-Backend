@@ -27,7 +27,6 @@ export class AuthenticationResolver {
     @CurrentUser() user: User,
     @Args("authCredentialsDTO", { type: () => AuthCredentialsDTO }) authCredentialsDTO: AuthCredentialsDTO,
   ): Promise<string> {
-    console.log(`This is the user ${JSON.stringify(user)}`);
     const access = await this.authService.signIn(authCredentialsDTO);
     return access.accessToken;
   }

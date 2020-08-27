@@ -10,11 +10,7 @@ import { AuthGuard } from "@nestjs/passport";
 export class GqlAuthGuard extends AuthGuard("jwt") {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   getRequest(context: ExecutionContext) {
-
-    console.log("The Body ");
-    console.log(JSON.stringify(context));
     const ctx = GqlExecutionContext.create(context);
-    console.log(ctx.getContext().req);
     return ctx.getContext().req;
   }
 
