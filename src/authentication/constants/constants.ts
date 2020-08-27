@@ -1,3 +1,3 @@
 export const AuthConstants: any = {
-  secret: 'test-secret',
+  secret: "test-secret",
 };
