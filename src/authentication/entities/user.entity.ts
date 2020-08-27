@@ -1,9 +1,7 @@
 
 import * as bcrypt from 'bcrypt';
-import { type } from 'os';
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Model } from 'objection';
-
+import { Model } from "objection";
 @ObjectType()
 export class User extends Model {
 
@@ -20,6 +18,9 @@ export class User extends Model {
 
   salt: string;
 
+  static get idColumn() {
+    return 'id';
+  }
 
   public async validatePassword(password: string): Promise<boolean> {
     const hash = bcrypt.hash(password, this.salt);

@@ -3,7 +3,7 @@ import { AuthCredentialsDTO } from '../dto/auth.credentials.dto';
 import { AuthService } from 'src/shared/authentication/auth.service';
 import { AccessToken } from '../interfaces/accesstoken.interface';
 
-@Controller('authentication')
+@Controller('auth')
 export class AuthenticationController {
     constructor(readonly authService: AuthService) {
         //   do something to the autheservice
@@ -17,6 +17,7 @@ export class AuthenticationController {
 
     @Get('/signin')
     signin(@Body() authCredentialsDTO: AuthCredentialsDTO): Promise<AccessToken> {
+        console.log(authCredentialsDTO.username)
         return this.authService.signIn(authCredentialsDTO);
     }
 

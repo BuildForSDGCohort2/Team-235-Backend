@@ -28,13 +28,16 @@ export class UserRepository {
     user.username = username;
     user.salt = salt;
     user.password = await this.hashPassword(password, salt);
-    // console.log(user.password);
+    console.log(user.password);
+
+    console.log(JSON.stringify(authCredentialsDTO))
     try {
-      //todo use return user
-      // await user.save();
+
+      // await user.save(); //for typeORM
+      //todo Exception on saving
       await this.userModel.query().insertAndFetch(user);
     } catch (error) {
-      // console.log(error.code);
+      console.log(error);
       if (error) {
         throw new InternalServerErrorException();
       }
@@ -48,8 +51,6 @@ export class UserRepository {
 
 
     const user = (await this.userModel.query().findOne({ username }));
-    // const user = await this.findOne({ username });
-    // console.log(username + ' ' + password);
     if (user && user.validatePassword(password)) {
       return user.username;
     }
