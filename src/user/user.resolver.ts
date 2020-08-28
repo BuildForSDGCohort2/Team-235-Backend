@@ -1,12 +1,12 @@
-import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
-import { UserService } from './user.service';
-import { UserDTO } from './dto/user.dto';
-import { CreateUserDTO } from './dto/create-user.dto';
-import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from 'src/authentication/gql.auth.guard';
-import { CurrentUser } from 'src/authentication/current-user.decorator';
-import { User } from './user.model';
-import { UserMapper } from './user.mapper';
+import { Resolver, Mutation, Args, Query } from "@nestjs/graphql";
+import { UserService } from "./user.service";
+import { UserDTO } from "./dto/user.dto";
+import { CreateUserDTO } from "./dto/create-user.dto";
+import { UseGuards } from "@nestjs/common";
+import { GqlAuthGuard } from "../authentication/gql.auth.guard";
+import { CurrentUser } from "../authentication/current-user.decorator";
+import { User } from "./user.model";
+import { UserMapper } from "./user.mapper";
 
 @Resolver(() => UserDTO)
 export class UserResolver {

@@ -14,37 +14,37 @@ export class UserDTO {
         isVerified: boolean,
         createdAt: number
     }){
-        Object.assign(this, data)
+        Object.assign(this, data);
     }
 
     @Field()
-    id: string
+    id: string;
 
     @Field()
-    firstName: string
+    firstName: string;
 
     @Field()
-    lastName: string
+    lastName: string;
 
     @Field({
         nullable: true
     })
-    imageUrl: string
+    imageUrl: string;
 
     @Field()
-    email: string
+    email: string;
 
     @Field({
         nullable: true
     })
-    phoneNumber: string
+    phoneNumber: string;
 
     @Field()
-    blocked: boolean
+    blocked: boolean;
 
     @Field()
-    isVerified: boolean
+    isVerified: boolean;
 
     @Field()
-    createdAt: number
+    createdAt: number;
 }

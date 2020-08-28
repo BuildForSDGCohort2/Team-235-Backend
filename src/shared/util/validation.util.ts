@@ -1,4 +1,4 @@
-import { PhoneNumberUtil } from "google-libphonenumber"
+import { PhoneNumberUtil } from "google-libphonenumber";
 
 export class ValidationUtil {
 
@@ -7,7 +7,7 @@ export class ValidationUtil {
     }
 
     static isValidPassword(password: string){
-        return password.length >= 6
+        return password.length >= 6;
     }
 
     static isValidPhoneNumber(phoneNumber: string){

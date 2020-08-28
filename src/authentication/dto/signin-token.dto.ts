@@ -1,7 +1,7 @@
 import {Field, ObjectType} from "@nestjs/graphql";
 
-@ObjectType()
-export class SignInToken {
+@ObjectType("SignInToken")
+export class SignInTokenDTO {
 
   constructor(data: {
     accessToken: string,

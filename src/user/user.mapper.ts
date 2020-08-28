@@ -13,9 +13,9 @@ export class UserMapper implements Mapper<UserDTO, User> {
            email: user.email,
            phoneNumber: user.phoneNumber,
            blocked: user.blocked,
-           isVerified: user.verifiedAt != null,
+           isVerified: user.verifiedAt !== null,
            createdAt: Number(moment(user.createdAt).format("x")),
-       })
+       });
     }
     
 }

@@ -1,10 +1,10 @@
-import { Injectable, BadRequestException, ConflictException } from '@nestjs/common';
+import { Injectable, BadRequestException, ConflictException } from "@nestjs/common";
 import bcrypt from "bcrypt";
-import { UserRepository } from './user.repository';
-import { User } from './user.model';
-import { MessageUtil } from 'src/shared/util/message.util';
-import { ValidationUtil } from 'src/shared/util/validation.util';
-import { CreateUserDTO } from './dto/create-user.dto';
+import { UserRepository } from "./user.repository";
+import { User } from "./user.model";
+import { MessageUtil } from "../shared/util/message.util";
+import { ValidationUtil } from "../shared/util/validation.util";
+import { CreateUserDTO } from "./dto/create-user.dto";
 
 @Injectable()
 export class UserService {
@@ -41,7 +41,7 @@ export class UserService {
         }
 
         if (await this.userRepository.findByEmail(dto.email)) {
-            throw new ConflictException(MessageUtil.USER_ALREADY_EXISTS)
+            throw new ConflictException(MessageUtil.USER_ALREADY_EXISTS);
         }
 
         const newUser = new User();
@@ -51,9 +51,7 @@ export class UserService {
         newUser.password = await bcrypt.hash(dto.password, 10);
         newUser.createdBy = currentUser;
 
-        console.log(newUser);
-
-        //TODO: Send email via sendgrid or similar.
+        //TODO: Send confirmation email to user.
 
         return await this.userRepository.save(newUser);
     }
