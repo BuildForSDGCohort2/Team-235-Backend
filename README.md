@@ -11,10 +11,10 @@ This project uses the Nestjs Framework. The reason for using this Typescipt base
 1.  In your terminal, clone this repository using the command:  
 `git clone https://github.com/BuildForSDGCohort2/Team-235-Backend` 
 
-2. Switch to the repository folder and create a `.env` file in the root of the project. Copy the contents in `.env.sample` into this file and replace all keys with your own. 
+2.  Switch to the repository folder and create a `.env` file in the root of the project. Copy the contents in `.env.sample` into this file and replace all keys with your own. 
 
-3. Run `npm install` to install all packages. 
+3.  Run `npm install` to install all packages. 
 
-4. Run all migrations using the following command: `npm run knex migrate:latest` 
+4.  Run all migrations using the following command: `npm run knex migrate:latest` 
  
 5. Run `npm run start:dev` to run the project in development. 
