@@ -17,5 +17,4 @@ This project uses the Nestjs Framework. The reason for using this Typescipt base
 
 4.  Run all migrations using the following command: `npm run knex migrate:latest` 
  
- 
 5.  Run `npm run start:dev` to run the project in development. 
