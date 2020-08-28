@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException, BadRequestException } from "@nestjs/common";
 import bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
-import { LoginCredentialsDTO } from "src/authentication/dto/login.credentials.dto";
-import { SignInToken } from "./signin-token.interface";
+import { LoginCredentialsDTO } from "src/authentication/dto/login-credentials.dto";
+import { SignInTokenDTO } from "./dto/signin-token.dto";
 import { UserService } from "../user/user.service";
 import { MessageUtil } from "../shared/util/message.util";
 import { ValidationUtil } from "../shared/util/validation.util";
@@ -17,7 +17,7 @@ export class AuthenticationService {
   ) { }
 
 
-  async signIn(dto: LoginCredentialsDTO): Promise<SignInToken> {
+  async signIn(dto: LoginCredentialsDTO): Promise<SignInTokenDTO> {
 
 
     if (!(dto.email && dto.password)) {
@@ -27,7 +27,7 @@ export class AuthenticationService {
     const errors: Record<string, string> = {};
 
     if (!ValidationUtil.isValidEmail(dto.email)) {
-      errors["email"] = MessageUtil.INVALID_EMAIL_ADDRESS
+      errors["email"] = MessageUtil.INVALID_EMAIL_ADDRESS;
     }
 
     if (!ValidationUtil.isValidPassword(dto.password)) {
@@ -41,7 +41,7 @@ export class AuthenticationService {
     const user = await this.userService.findByEmail(dto.email);
 
     if (!user || !(await bcrypt.compare(dto.password, user.password))) {
-      throw new UnauthorizedException(MessageUtil.INVALID_CREDENTIALS)
+      throw new UnauthorizedException(MessageUtil.INVALID_CREDENTIALS);
     }
 
   
@@ -49,7 +49,7 @@ export class AuthenticationService {
       sub: user.id
     };
 
-    return new SignInToken({
+    return new SignInTokenDTO({
       accessToken: this.jwtService.sign(payload),
       tokenType: "Bearer",
       expiresIn: Number(process.env.JWT_EXPIRES_IN)

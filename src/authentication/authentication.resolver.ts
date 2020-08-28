@@ -3,8 +3,8 @@ import { GqlAuthGuard } from "./gql.auth.guard";
 import { UseGuards } from "@nestjs/common";
 import { CurrentUser } from "./current-user.decorator";
 import { User } from "../user/user.model";
-import { SignInToken } from "./signin-token.interface";
-import { LoginCredentialsDTO } from "./dto/login.credentials.dto";
+import { SignInTokenDTO } from "./dto/signin-token.dto";
+import { LoginCredentialsDTO } from "./dto/login-credentials.dto";
 import { AuthenticationService } from "./authentication.service";
 import { UserDTO } from "src/user/dto/user.dto";
 
@@ -14,10 +14,10 @@ export class AuthenticationResolver {
     private readonly authService: AuthenticationService
   ) {}
 
-  @Mutation(() => SignInToken)
+  @Mutation(() => SignInTokenDTO)
   async signin(
     @Args("data") dto: LoginCredentialsDTO,
-  ): Promise<SignInToken> {
+  ): Promise<SignInTokenDTO> {
     return await this.authService.signIn(dto);
   }
 
