@@ -8,7 +8,7 @@ import { CurrentUser } from 'src/authentication/current-user.decorator';
 import { User } from './user.model';
 import { UserMapper } from './user.mapper';
 
-@Resolver('User')
+@Resolver(() => UserDTO)
 export class UserResolver {
 
     constructor(
@@ -23,8 +23,10 @@ export class UserResolver {
     }
 
     @Mutation(() => UserDTO)
-    async createUser(@Args("data") dto: CreateUserDTO){
-        return await this.userService.createUser(null, dto);
+    @UseGuards(GqlAuthGuard)
+    async createUser(@Args("data") dto: CreateUserDTO, @CurrentUser() currentUser: User){
+        const createdUser = await this.userService.createUser(currentUser, dto);
+        return this.userMapper.mapFromModel(createdUser);
     }
 
 }

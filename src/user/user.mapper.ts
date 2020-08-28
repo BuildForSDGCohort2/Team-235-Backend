@@ -9,11 +9,12 @@ export class UserMapper implements Mapper<UserDTO, User> {
            id: user.id,
            firstName: user.firstName,
            lastName: user.lastName,
+           imageUrl: user.imageUrl,
            email: user.email,
            phoneNumber: user.phoneNumber,
            blocked: user.blocked,
            isVerified: user.verifiedAt != null,
-           createdAt: Number(moment(user.createdAt).format("x"))
+           createdAt: Number(moment(user.createdAt).format("x")),
        })
     }
     

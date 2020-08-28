@@ -8,28 +8,25 @@ export class UserRepository implements Repository<User> {
   constructor(
     @Inject(User)
     private readonly userModel: typeof User
-  ) {}
-
-  async existsById(id: string): Promise<boolean> {
-    return await this.find(id) != null;
-  }
-
+  ) { }
 
   async find(id: string): Promise<User> {
-    return await this.userModel.query().findById(id);
+    return await this.userModel.query().findById(id)
+    .withGraphFetched("[createdBy, updatedBy]")
   }
 
   async findByEmail(email: string): Promise<User> {
-    return await this.userModel.query().findOne({email});
+    return await this.userModel.query().findOne({ email });
   }
 
   async findAll(): Promise<User[]> {
-    return await this.userModel.query();
+    return await this.userModel.query()
+    .withGraphFetched("[createdBy, updatedBy]")
   }
 
 
   async save(user: User): Promise<User> {
-    return await this.userModel.query().insertGraphAndFetch(user);
+    return await this.userModel.query().upsertGraphAndFetch(user, { relate: ["createdBy", "updatedBy"] });
   }
 
 

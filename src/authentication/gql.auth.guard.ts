@@ -5,29 +5,18 @@ import {
 } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { AuthGuard } from "@nestjs/passport";
+import { MessageUtil } from "src/shared/util/message.util";
 
 @Injectable()
 export class GqlAuthGuard extends AuthGuard("jwt") {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   getRequest(context: ExecutionContext) {
     const ctx = GqlExecutionContext.create(context);
     return ctx.getContext().req;
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  canActivate(context: ExecutionContext) {
-    // Add your custom authentication logic here
-    // for example, call super.logIn(request) to establish a session.
-    // super.logIn(context.getHandler());
-    return super.canActivate(context);
-  }
-
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   handleRequest(err, user, info) {
-    // You can throw an exception based on either "info" or "err" arguments
-
     if (err || !user) {
-      throw err || new UnauthorizedException();
+      throw err || new UnauthorizedException(MessageUtil.INVALID_AUTHORIZATION_TOKEN);
     }
     return user;
   }

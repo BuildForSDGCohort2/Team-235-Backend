@@ -10,39 +10,37 @@ import { CreateUserDTO } from './dto/create-user.dto';
 export class UserService {
     constructor(
         private readonly userRepository: UserRepository
-    ){}
+    ) { }
 
-    async createUser(currentUser: User,  dto: CreateUserDTO){
+    async createUser(currentUser: User, dto: CreateUserDTO) {
 
-        if(!(dto.firstName && dto.lastName && dto.email && dto.password)){
+        if (!(dto.firstName && dto.lastName && dto.email && dto.password)) {
             throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
         }
 
         const errors: Record<string, string> = {};
 
-        if(!ValidationUtil.isValidName(dto.firstName)){
+        if (!ValidationUtil.isValidName(dto.firstName)) {
             errors["firstName"] = MessageUtil.INVALID_FIRST_NAME;
         }
 
-        if(!ValidationUtil.isValidName(dto.lastName)){
+        if (!ValidationUtil.isValidName(dto.lastName)) {
             errors["lastName"] = MessageUtil.INVALID_LAST_NAME;
         }
 
-        if(!ValidationUtil.isValidEmail(dto.email)){
+        if (!ValidationUtil.isValidEmail(dto.email)) {
             errors["email"] = MessageUtil.INVALID_EMAIL_ADDRESS;
         }
 
-        if(!ValidationUtil.isValidPassword(dto.password)){
+        if (!ValidationUtil.isValidPassword(dto.password)) {
             errors["password"] = MessageUtil.INVALID_PASSWORD;
         }
 
-        if(Object.keys(errors).length){
+        if (Object.keys(errors).length) {
             throw new BadRequestException(errors);
         }
 
-        const user = await this.userRepository.findByEmail(dto.email);
-
-        if(user){
+        if (await this.userRepository.findByEmail(dto.email)) {
             throw new ConflictException(MessageUtil.USER_ALREADY_EXISTS)
         }
 
@@ -51,18 +49,21 @@ export class UserService {
         newUser.lastName = dto.lastName;
         newUser.email = dto.email;
         newUser.password = await bcrypt.hash(dto.password, 10);
+        newUser.createdBy = currentUser;
 
-        //Send email via sendgrid or similar.
+        console.log(newUser);
+
+        //TODO: Send email via sendgrid or similar.
 
         return await this.userRepository.save(newUser);
     }
 
 
-    async getProfile(id: string): Promise<User>{
+    async getProfile(id: string): Promise<User> {
         return await this.userRepository.find(id);
     }
 
-    async findByEmail(email: string){
+    async findByEmail(email: string) {
         return this.userRepository.findByEmail(email);
     }
 }

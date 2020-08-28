@@ -7,8 +7,9 @@ export class UserDTO {
         id: string,
         firstName: string,
         lastName: string,
-        phoneNumber: string,
+        imageUrl: string,
         email: string,
+        phoneNumber?: string,
         blocked: boolean,
         isVerified: boolean,
         createdAt: number
@@ -28,10 +29,15 @@ export class UserDTO {
     @Field({
         nullable: true
     })
-    phoneNumber: string
+    imageUrl: string
 
     @Field()
     email: string
+
+    @Field({
+        nullable: true
+    })
+    phoneNumber: string
 
     @Field()
     blocked: boolean

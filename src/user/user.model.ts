@@ -8,6 +8,7 @@ export class User extends Model {
   id: string;
   firstName: string;
   lastName: string;
+  imageUrl: string;
   email: string;
   password: string;
   blocked: boolean;
@@ -21,19 +22,19 @@ export class User extends Model {
 
   static relationMappings = {
     createdBy: {
-      relation: Model.HasOneRelation,
+      relation: Model.BelongsToOneRelation,
       modelClass: User,
       join: {
-        from: `${User.tableName}.id`,
-        to: `${User.tableName}.created_by_id`
+        from: `${User.tableName}.createdById`,
+        to: `${User.tableName}.id`
       }
     },
     updatedBy: {
-      relation: Model.HasOneRelation,
+      relation: Model.BelongsToOneRelation,
       modelClass: User,
       join: {
-        from: `${User.tableName}.id`,
-        to: `${User.tableName}.created_by_id`
+        from: `${User.tableName}.updatedById`,
+        to: `${User.tableName}.id`
       }
     }
   }
