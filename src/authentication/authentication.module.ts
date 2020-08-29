@@ -1,29 +1,24 @@
 import { Module } from "@nestjs/common";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
-import { AuthConstants } from "./constants/constants";
-import { AuthenticationController } from "./controllers/authentication.controller";
-import { JwtStrategy } from "./strategies/passport.strategy";
-import { AuthService } from "src/shared/authentication/auth.service";
-import { GqlAuthGuard } from "./strategies/gql.auth.guard";
-import { User } from "./entities/user.entity";
-import { ObjectionModule } from "@willsoto/nestjs-objection";
-import { UserRepository } from "./repositories/user.repository";
-import { AuthenticationResolver } from "./resolvers/authentication.resolver";
+import { JwtStrategy } from "./passport.strategy";
+import { AuthenticationService } from "src/authentication/authentication.service";
+import { GqlAuthGuard } from "./gql.auth.guard";
+import { AuthenticationResolver } from "./authentication.resolver";
+import { UserModule } from "src/user/user.module";
 
 @Module({
     imports: [
-        ObjectionModule.forFeature([User]),
-        PassportModule.register({ session: true, defaultStrategy: "jwt" }),
+        PassportModule.register({ defaultStrategy: "jwt" }),
         JwtModule.register({
-            secret: AuthConstants.secret,
+            secret: String(process.env.JWT_SECRET),
             signOptions: {
-                expiresIn: 3600,
+                expiresIn: Number(process.env.JWT_EXPIRES_IN),
             },
         }),
+        UserModule,
     ],
-    controllers: [AuthenticationController],
-    providers: [AuthService, JwtStrategy, GqlAuthGuard, UserRepository, AuthenticationResolver],
+    providers: [AuthenticationService, JwtStrategy, GqlAuthGuard, AuthenticationResolver],
     exports: [JwtStrategy, PassportModule, GqlAuthGuard],
 })
 export class AuthenticationModule { }
