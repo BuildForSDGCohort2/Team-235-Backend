@@ -13,7 +13,7 @@ export class User extends Model {
   password: string;
   blocked: boolean;
   phoneNumber: string;
-  verifiedAt: string
+  verifiedAt: string;
   createdAt: string;
   createdBy: User;
   updatedAt: string;

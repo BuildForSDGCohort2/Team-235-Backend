@@ -19,7 +19,6 @@ export class AuthenticationService {
 
   async signIn(dto: LoginCredentialsDTO): Promise<SignInTokenDTO> {
 
-
     if (!(dto.email && dto.password)) {
       throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
     }
@@ -44,6 +43,7 @@ export class AuthenticationService {
       throw new UnauthorizedException(MessageUtil.INVALID_CREDENTIALS);
     }
 
+    //Check if user is blocked 
   
     const payload: JWTPayload = {
       sub: user.id
