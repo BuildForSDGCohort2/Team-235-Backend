@@ -18,4 +18,4 @@ export async function seed(knex: Knex): Promise<void> {
             password: await bcrypt.hash(String(process.env.ADMIN_SEEDER_PASSWORD), 10)
         }
     ]);
-};
+}
