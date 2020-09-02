@@ -3,6 +3,7 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { DatabaseModule } from "./shared/database/database.module";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { UserModule } from "./user/user.module";
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [DatabaseModule,
@@ -15,6 +16,7 @@ import { UserModule } from "./user/user.module";
     }),
     AuthenticationModule,
     UserModule,
+    CategoryModule,
   ],
   controllers: []
 })
