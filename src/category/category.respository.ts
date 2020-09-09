@@ -3,7 +3,7 @@ import { Repository } from "src/shared/repository/repository";
 import { Injectable, Inject } from "@nestjs/common";
 
 @Injectable()
-export class CategoryRepository implements Repository<Category> {
+export class CategoryRepository implements Repository<String, Category> {
 
     constructor(
         @Inject(Category)

@@ -6,7 +6,6 @@ export class CategoryDTO {
     constructor(data: {
         id: string,
         name: string,
-        imageUrl: string,
         createdAt: number
     }) {
         Object.assign(this, data);
@@ -17,12 +16,6 @@ export class CategoryDTO {
 
     @Field()
     name: string;
-
-
-    @Field({
-        nullable: true
-    })
-    imageUrl: string;
 
 
     @Field()

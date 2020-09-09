@@ -1,12 +1,8 @@
 import { InputType, Field } from "@nestjs/graphql";
 
 @InputType("CategoryInfo")
-export class CreateUserDTO {
+export class CreateCategoryDTO {
 
     @Field()
     readonly name: string
-
-    @Field()
-    readonly imageUrl: string
-
 }

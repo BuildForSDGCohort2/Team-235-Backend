@@ -8,7 +8,6 @@ export class Category extends Model {
 
     id: string;
     name: string;
-    imageUrl: string;
     createdAt: string;
     createdBy: User;
     updatedAt: string;

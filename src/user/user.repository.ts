@@ -3,7 +3,7 @@ import { User } from "./user.model";
 import { Repository } from "src/shared/repository/repository";
 
 @Injectable()
-export class UserRepository implements Repository<User> {
+export class UserRepository implements Repository<String, User> {
 
   constructor(
     @Inject(User)
