@@ -5,6 +5,8 @@ import { User } from "../../../user/user.model";
 
 export async function up(knex: Knex): Promise<void> {
     const exists = await knex.schema.hasTable(Category.tableName);
+
+    // todo Fix migration
     if (!exists) {
         await knex.schema.raw("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"");
         return await knex.schema.createTable(Category.tableName, (table) => {
