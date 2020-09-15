@@ -14,6 +14,10 @@ export class CategoryRepository implements Repository<String, Category> {
         return await this.categoryModel.query().findById(id)
             .withGraphFetched("[createdBy, updatedBy]");
     }
+    async findByName(name: string): Promise<Category> {
+        return await this.categoryModel.query().findOne({ name })
+            .withGraphFetched("[createdBy, updatedBy]");
+    }
 
     async findAll(): Promise<Category[]> {
         return await this.categoryModel.query()

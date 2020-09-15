@@ -8,4 +8,5 @@ export class MessageUtil {
     static USER_ALREADY_EXISTS = "An user with this email already exists."
     static INVALID_CREDENTIALS = "Invalid credentials."
     static INVALID_AUTHORIZATION_TOKEN = "The access token provided is either expired, revoked, malformed, or invalid."
+    static EXIST_CATEGORY_NAME = "Category Name Already Exist";
 }
