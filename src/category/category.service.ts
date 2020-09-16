@@ -12,7 +12,9 @@ export class CategoryService {
         private readonly categoryRepository: CategoryRepository
     ) { }
 
-    async createCategory(currentUser: User, dto: CreateCategoryDTO) {
+    async createCategory(
+        currentUser: User,
+        dto: CreateCategoryDTO): Promise<Category> {
 
         const category = new Category();
 
@@ -21,7 +23,8 @@ export class CategoryService {
         }
         category.name = dto.name;
         category.createdBy = currentUser;
+
+        return category;
     }
 
-    
 }

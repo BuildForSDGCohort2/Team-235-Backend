@@ -1,5 +1,5 @@
 import { Model } from "objection";
-import { User } from "src/user/user.model";
+import { User } from "../user/user.model";
 
 
 export class Category extends Model {
