@@ -28,7 +28,7 @@ export class RoleRepository implements Repository<number, Role> {
     async save(role: Role): Promise<Role> {
         return await this.roleModel.query().upsertGraphAndFetch(role, {
             relate: true
-        })
+        });
     }
 
     remove(data: Role): Promise<void> {

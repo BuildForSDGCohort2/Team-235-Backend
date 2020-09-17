@@ -1,7 +1,7 @@
 import moment from "moment";
 import _ from "lodash";
 import bcrypt from "bcrypt";
-import {User} from "./user/user.model"
+import {User} from "./user/user.model";
 import { Role } from "./role/role.model";
 import { Permission } from "./role/permission.model";
 import { Model } from "objection";
@@ -40,10 +40,10 @@ export class DataInitializer {
             }
             else{
                 const superAdminRole = user.roles[0];
-                if(superAdminRole.permissions.length != permissions.length){
+                if(superAdminRole.permissions.length !== permissions.length){
                     user.roles[0].permissions = superAdminRole.permissions.concat(
                         _.differenceBy(permissions, superAdminRole.permissions, "id")
-                    )
+                    );
                 }
             }
 

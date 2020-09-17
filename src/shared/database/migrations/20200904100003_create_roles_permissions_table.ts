@@ -10,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
         await knex.schema.createTable(ROLES_PERMISSIONS_TABLE, (table) => {
             table.integer("role_id").notNullable().unsigned().references("id").inTable(Role.tableName).onDelete("CASCADE");
 			table.integer("permission_id").notNullable().unsigned().references("id").inTable(Permission.tableName).onDelete("CASCADE");
-        })
+        });
     }
 }
 

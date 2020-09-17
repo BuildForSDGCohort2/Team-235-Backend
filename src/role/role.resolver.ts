@@ -1,11 +1,11 @@
-import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query } from "@nestjs/graphql";
 import { RoleDTO } from "./dto/role.dto";
 import { CreateRoleDTO } from "./dto/create-role.dto";
 import { RoleService } from "./role.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "src/authentication/gql.auth.guard";
 import { CurrentUser } from "src/authentication/current-user.decorator";
-import { User } from "src/user/user.model";
+import { User } from "../user/user.model";
 import { RoleMapper } from "./role.mapper";
 import { PermissionDTO } from "./dto/permission.dto";
 import { PermissionMapper } from "./permission.mapper";
@@ -29,7 +29,7 @@ export class RoleResolver {
     )
     async getPermissions(){
         return (await this.roleService.getPermissions())
-        .map(permission => this.permissionMapper.mapFromModel(permission));
+        .map((permission) => this.permissionMapper.mapFromModel(permission));
     }
 
     @Query(() => [RoleDTO])
@@ -39,7 +39,7 @@ export class RoleResolver {
     )
     async getRoles(){
         return (await this.roleService.getRoles())
-        .map(role => this.roleMapper.mapFromModel(role));
+        .map((role) => this.roleMapper.mapFromModel(role));
     }
 
     @Mutation(() => RoleDTO)

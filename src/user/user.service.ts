@@ -53,9 +53,9 @@ export class UserService {
         newUser.email = dto.email;
         newUser.password = await bcrypt.hash(dto.password, 10);
         newUser.createdBy = currentUser;
-        newUser.roles = await Promise.all(dto.roleIds.map(roleId => {
-            return this.roleRepository.find(roleId) 
-        }))
+        newUser.roles = await Promise.all(dto.roleIds.map((roleId) => {
+            return this.roleRepository.find(roleId) ;
+        }));
 
         //TODO: Send confirmation email to user.
 

@@ -9,15 +9,15 @@ export const PermissionGuard = (permissions: string[]) => {
       canActivate(context: ExecutionContext) {
         const ctx = GqlExecutionContext.create(context);
         const request = ctx.getContext().req;
-        const roles: Role[]= request.user.roles
-        let permissionValues: string[] = roles.flatMap(role => {
-            return role.permissions.map(permission => {
-                return permission.value
-            })
+        const roles: Role[]= request.user.roles;
+        let permissionValues: string[] = roles.flatMap((role) => {
+            return role.permissions.map((permission) => {
+                return permission.value;
+            });
         })
 
-        permissionValues = [...new Set(permissionValues)]
-        if(!permissions.every(value => permissionValues.indexOf(value) > -1)){
+        permissionValues = [...new Set(permissionValues)];
+        if(!permissions.every((value) => permissionValues.indexOf(value) > -1)){
             throw new ForbiddenException(MessageUtil.PERMISSION_DENIED);
         }
 
@@ -27,4 +27,4 @@ export const PermissionGuard = (permissions: string[]) => {
   
     const guard = mixin(RoleGuardMixin);
     return guard;
-  }
+  };

@@ -1,7 +1,6 @@
-import { Module } from '@nestjs/common';
-import { RoleService } from './role.service';
-import { RoleResolver } from './role.resolver';
-import { DatabaseModule } from "src/shared/database/database.module";
+import { Module } from "@nestjs/common";
+import { RoleService } from "./role.service";
+import { RoleResolver } from "./role.resolver";
 import { ObjectionModule } from "@willsoto/nestjs-objection";
 import { Role } from "./role.model";
 import { RoleRepository } from "./role.repository";

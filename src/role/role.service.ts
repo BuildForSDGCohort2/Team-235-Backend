@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
+import { Injectable, BadRequestException, NotFoundException } from "@nestjs/common";
 import _ from "lodash";
 import { RoleRepository } from "./role.repository";
 import { CreateRoleDTO } from "./dto/create-role.dto";
@@ -50,9 +50,9 @@ export class RoleService {
         role.description = dto.description;
         role.createdBy = currentUser;
 
-        role.permissions = await Promise.all(dto.permissionIds.map(async permissionId => {
+        role.permissions = await Promise.all(dto.permissionIds.map(async (permissionId) => {
             return this.permissionRepository.find(permissionId);
-        }))
+        }));
 
         return await this.roleRepository.save(role);
     }
@@ -86,15 +86,12 @@ export class RoleService {
             throw new NotFoundException(MessageUtil.ROLE_NOT_FOUND);
         }
 
-        role.permissions = role.permissions.concat(await Promise.all(dto.permissionIds.map(async permissionId => {
-            console.log(permissionId);
+        role.permissions = role.permissions.concat(await Promise.all(dto.permissionIds.map(async (permissionId) => {
             const permission = await this.permissionRepository.find(permissionId);
             if(permission){
                 return permission;
             }
         })));
-
-        console.log(role.permissions);
 
         return await this.roleRepository.save(role);
     }
@@ -110,7 +107,7 @@ export class RoleService {
             throw new NotFoundException(MessageUtil.ROLE_NOT_FOUND);
         }
 
-        role.permissions = role.permissions.filter(permission => {
+        role.permissions = role.permissions.filter((permission) => {
             return !dto.permissionIds.includes(permission.id);
         })
 

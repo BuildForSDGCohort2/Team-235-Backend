@@ -10,6 +10,6 @@ export class PermissionMapper implements Mapper<PermissionDTO, Permission>{
             id: permission.id,
             value: permission.value,
             description: permission.description
-        })
+        });
     }
 }

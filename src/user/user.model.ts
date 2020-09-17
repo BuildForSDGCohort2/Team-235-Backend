@@ -28,12 +28,12 @@ export class User extends Model {
       relation: Model.ManyToManyRelation,
       modelClass: Role,
       join: {
-        from: `users.id`,
+        from: "users.id",
         through: {
-          from: `users_roles.userId`,
-          to: `users_roles.roleId`
+          from: "users_roles.userId",
+          to: "users_roles.roleId"
         },
-        to: `roles.id`
+        to: "roles.id"
       }
     },
     createdBy: {

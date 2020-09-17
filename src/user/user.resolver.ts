@@ -29,8 +29,8 @@ export class UserResolver {
         PermissionGuard(["users.read"])
     )
     async getUsers(){
-        return (await this.userService.getUsers()).map(user => {
-            return this.userMapper.mapFromModel(user)
+        return (await this.userService.getUsers()).map((user) => {
+            return this.userMapper.mapFromModel(user);
         });
     }
 

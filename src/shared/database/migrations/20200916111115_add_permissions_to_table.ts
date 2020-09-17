@@ -29,7 +29,7 @@ const permissions = [
     {value: "stock.create", description: "Add Stock"},
     {value: "stock.update", description: "Update Stock"},
     {value: "stock.delete", description: "Delete Stock"},
-]
+];
 
 
 export async function up(knex: Knex): Promise<void> {
@@ -38,7 +38,7 @@ export async function up(knex: Knex): Promise<void> {
         
         queries.push(
             knex.table(Permission.tableName).insert(permission)
-        )
+        );
     }
 
     await Promise.all(queries);

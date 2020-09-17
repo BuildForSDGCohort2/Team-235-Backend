@@ -20,8 +20,8 @@ export class UserMapper implements Mapper<UserDTO, User> {
            imageUrl: user.imageUrl,
            email: user.email,
            phoneNumber: user.phoneNumber,
-           roles: user.roles.map(role => {
-               return this.roleMapper.mapFromModel(role)
+           roles: user.roles.map((role) => {
+               return this.roleMapper.mapFromModel(role);
            }),
            blocked: user.blocked,
            isVerified: user.verifiedAt !== null,

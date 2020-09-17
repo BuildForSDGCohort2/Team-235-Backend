@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { DataInitializer } from "./data-initializer"
+import { DataInitializer } from "./data-initializer";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 

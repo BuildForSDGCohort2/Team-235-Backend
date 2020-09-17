@@ -17,10 +17,10 @@ export class RoleMapper implements Mapper<RoleDTO, Role>{
             id: role.id,
             name: role.name,
             permissions: role.permissions
-            .map(permission => this.permissionMapper.mapFromModel(permission)),
+            .map((permission) => this.permissionMapper.mapFromModel(permission)),
             description: role.description,
             createdAt: Number(moment(role.createdAt).format("x"))
-        })
+        });
     }
     
 }

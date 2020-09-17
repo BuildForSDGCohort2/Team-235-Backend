@@ -21,12 +21,12 @@ export class Role extends Model {
             relation: Model.ManyToManyRelation,
             modelClass: __dirname + "/permission.model",
             join: {
-                from: `roles.id`,
+                from: "roles.id",
                 through: {
-                  from: `roles_permissions.role_id`,
-                  to: `roles_permissions.permission_id` 
+                  from: "roles_permissions.role_id",
+                  to: "roles_permissions.permission_id" 
                 },
-                to: `permissions.id`
+                to: "permissions.id"
             }
         },
 
@@ -34,8 +34,8 @@ export class Role extends Model {
             relation: Model.BelongsToOneRelation,
             modelClass: __dirname + "/../user/user.model",
             join: {
-                from: `roles.createdById`,
-                to: `users.id`
+                from: "roles.createdById",
+                to: "users.id"
             }
         },
 
@@ -43,8 +43,8 @@ export class Role extends Model {
             relation: Model.BelongsToOneRelation,
             modelClass: __dirname + "/../user/user.model",
             join: {
-                from: `roles.updatedById`,
-                to: `users.id`
+                from: "roles.updatedById",
+                to: "users.id"
             }
         }
     }
