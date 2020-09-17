@@ -1,4 +1,5 @@
 import { ObjectType, Field } from "@nestjs/graphql";
+import { RoleDTO } from "src/role/dto/role.dto";
 
 @ObjectType("User")
 export class UserDTO {
@@ -10,6 +11,7 @@ export class UserDTO {
         imageUrl: string,
         email: string,
         phoneNumber?: string,
+        roles: RoleDTO[],
         blocked: boolean,
         isVerified: boolean,
         createdAt: number
@@ -38,6 +40,9 @@ export class UserDTO {
         nullable: true
     })
     phoneNumber: string;
+
+    @Field(() => [RoleDTO])
+    roles: RoleDTO[]
 
     @Field()
     blocked: boolean;
