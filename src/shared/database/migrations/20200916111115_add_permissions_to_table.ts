@@ -52,7 +52,7 @@ export async function down(knex: Knex): Promise<void> {
             knex.table(Permission.tableName).delete().where({
                 value: permission.value
             })
-        )
+        );
     }
 
     await Promise.all(queries);

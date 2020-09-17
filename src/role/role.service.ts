@@ -109,7 +109,7 @@ export class RoleService {
 
         role.permissions = role.permissions.filter((permission) => {
             return !dto.permissionIds.includes(permission.id);
-        })
+        });
 
         role.updatedBy = currentUser;
         return await this.roleRepository.save(role);

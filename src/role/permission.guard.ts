@@ -14,7 +14,7 @@ export const PermissionGuard = (permissions: string[]) => {
             return role.permissions.map((permission) => {
                 return permission.value;
             });
-        })
+        });
 
         permissionValues = [...new Set(permissionValues)];
         if(!permissions.every((value) => permissionValues.indexOf(value) > -1)){
