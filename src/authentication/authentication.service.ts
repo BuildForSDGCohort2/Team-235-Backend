@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException, BadRequestException } from "@nestjs/common";
+import { Injectable, UnauthorizedException, BadRequestException, ForbiddenException } from "@nestjs/common";
 import bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import { LoginCredentialsDTO } from "src/authentication/dto/login-credentials.dto";
@@ -43,7 +43,9 @@ export class AuthenticationService {
       throw new UnauthorizedException(MessageUtil.INVALID_CREDENTIALS);
     }
 
-    //Check if user is blocked 
+    if(user.blocked){
+      throw new ForbiddenException(MessageUtil.PERMISSION_DENIED);
+    } 
   
     const payload: JWTPayload = {
       sub: user.id
