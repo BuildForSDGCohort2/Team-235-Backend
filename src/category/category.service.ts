@@ -1,4 +1,4 @@
-import { Injectable, ConflictException } from "@nestjs/common";
+import { Injectable, ConflictException, NotFoundException } from "@nestjs/common";
 import { CategoryRepository } from "./category.respository";
 import { CreateCategoryDTO } from "./dto/create-category.dto";
 import { User } from "src/user/user.model";
@@ -14,7 +14,7 @@ export class CategoryService {
 
     async createCategory(
         currentUser: User,
-        dto: CreateCategoryDTO): Promise<Category> {
+        dto: CreateCategoryDTO) {
 
         const category = new Category();
 
@@ -24,7 +24,25 @@ export class CategoryService {
         category.name = dto.name;
         category.createdBy = currentUser;
 
+        return await this.categoryRepository.save(category);
+    }
+
+
+    async findByName(name: string) {
+        const category = await this.categoryRepository.findByName(name);
+        console.log(category);
+        if (category == null) throw new NotFoundException(MessageUtil.CATEGORY_NOT_FOUND)
         return category;
     }
 
+    async findById(id: number) {
+        const category = await this.categoryRepository.find(id);
+        console.log(category);
+        if (category == null) throw new NotFoundException(MessageUtil.CATEGORY_NOT_FOUND)
+        return category;
+    }
+
+    async findAll() {
+        return await this.categoryRepository.findAll();
+    }
 }

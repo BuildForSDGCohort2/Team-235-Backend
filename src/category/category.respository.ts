@@ -3,14 +3,14 @@ import { Repository } from "src/shared/repository/repository";
 import { Injectable, Inject } from "@nestjs/common";
 
 @Injectable()
-export class CategoryRepository implements Repository<String, Category> {
+export class CategoryRepository implements Repository<number, Category> {
 
     constructor(
         @Inject(Category)
         private readonly categoryModel: typeof Category
     ) { }
 
-    async find(id: string): Promise<Category> {
+    async find(id: number): Promise<Category> {
         return await this.categoryModel.query().findById(id)
             .withGraphFetched("[createdBy, updatedBy]");
     }

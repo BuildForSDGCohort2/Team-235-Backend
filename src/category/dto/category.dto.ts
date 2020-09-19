@@ -4,7 +4,7 @@ import { ObjectType, Field } from "@nestjs/graphql";
 export class CategoryDTO {
 
     constructor(data: {
-        id: string,
+        id: number,
         name: string,
         createdAt: number
     }) {
@@ -12,7 +12,7 @@ export class CategoryDTO {
     }
 
     @Field()
-    id: string;
+    id: number;
 
     @Field()
     name: string;

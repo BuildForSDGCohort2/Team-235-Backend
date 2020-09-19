@@ -6,7 +6,7 @@ export class Category extends Model {
 
     static tableName = "categories";
 
-    id: string;
+    id: number;
     name: string;
     createdAt: string;
     createdBy: User;
@@ -19,7 +19,7 @@ export class Category extends Model {
             relation: Model.BelongsToOneRelation,
             modelClass: User,
             join: {
-                from: `${User.tableName}.createdById`,
+                from: `${Category.tableName}.createdById`,
                 to: `${User.tableName}.id`
             }
         },
@@ -27,7 +27,7 @@ export class Category extends Model {
             relation: Model.BelongsToOneRelation,
             modelClass: User,
             join: {
-                from: `${User.tableName}.updatedById`,
+                from: `${Category.tableName}.updatedById`,
                 to: `${User.tableName}.id`
             }
         }
