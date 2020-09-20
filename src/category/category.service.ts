@@ -15,7 +15,6 @@ export class CategoryService {
     async createCategory(
         currentUser: User,
         dto: CreateCategoryDTO) {
-
         const category = new Category();
 
         if (await this.categoryRepository.findByName(dto.name)) {
@@ -23,21 +22,18 @@ export class CategoryService {
         }
         category.name = dto.name;
         category.createdBy = currentUser;
-
         return await this.categoryRepository.save(category);
     }
 
 
     async findByName(name: string) {
         const category = await this.categoryRepository.findByName(name);
-        console.log(category);
         if (category == null) throw new NotFoundException(MessageUtil.CATEGORY_NOT_FOUND)
         return category;
     }
 
     async findById(id: number) {
         const category = await this.categoryRepository.find(id);
-        console.log(category);
         if (category == null) throw new NotFoundException(MessageUtil.CATEGORY_NOT_FOUND)
         return category;
     }
