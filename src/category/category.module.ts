@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { CategoryResolver } from "./category.resolver";
-import { CategoryMapper } from "./category.mapper"
+import { CategoryMapper } from "./category.mapper";
 import { Category } from "./category.model";
 import { ObjectionModule } from "@willsoto/nestjs-objection";
 import { DatabaseModule } from "src/shared/database/database.module";

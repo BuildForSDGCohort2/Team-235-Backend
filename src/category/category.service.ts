@@ -34,7 +34,9 @@ export class CategoryService {
 
     async findById(id: number) {
         const category = await this.categoryRepository.find(id);
-        if (category == null) throw new NotFoundException(MessageUtil.CATEGORY_NOT_FOUND)
+        if (category === null) {
+            throw new NotFoundException(MessageUtil.CATEGORY_NOT_FOUND);
+        }
         return category;
     }
 
