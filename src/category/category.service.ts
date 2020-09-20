@@ -28,7 +28,9 @@ export class CategoryService {
 
     async findByName(name: string) {
         const category = await this.categoryRepository.findByName(name);
-        if (category == null) throw new NotFoundException(MessageUtil.CATEGORY_NOT_FOUND)
+        if (category === null) {
+            throw new NotFoundException(MessageUtil.CATEGORY_NOT_FOUND);
+        }
         return category;
     }
 
