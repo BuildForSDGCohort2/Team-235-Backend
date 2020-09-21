@@ -12,7 +12,7 @@ export class UserRepository implements Repository<string, User> {
 
   async find(id: string): Promise<User> {
     return await this.userModel.query().findById(id)
-      .withGraphFetched("[createdBy, updatedBy]");
+      .withGraphFetched("*");
   }
 
   async findByEmail(email: string): Promise<User> {
@@ -21,12 +21,16 @@ export class UserRepository implements Repository<string, User> {
 
   async findAll(): Promise<User[]> {
     return await this.userModel.query()
-      .withGraphFetched("[createdBy, updatedBy]");
+      .withGraphFetched("*");
   }
 
 
   async save(user: User): Promise<User> {
-    return await this.userModel.query().upsertGraphAndFetch(user, { relate: ["createdBy", "updatedBy"] });
+    return await this.userModel.query().upsertGraphAndFetch(user, { 
+      relate: true,
+      noUpdate: true,
+      noDelete: true
+    });
   }
 
 

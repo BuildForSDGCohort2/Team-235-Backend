@@ -7,6 +7,7 @@ import { GqlAuthGuard } from "../authentication/gql.auth.guard";
 import { CurrentUser } from "../authentication/current-user.decorator";
 import { User } from "./user.model";
 import { UserMapper } from "./user.mapper";
+import { PermissionGuard } from "src/role/permission.guard";
 
 @Resolver(() => UserDTO)
 export class UserResolver {
@@ -22,8 +23,22 @@ export class UserResolver {
       return this.userMapper.mapFromModel(currentUser);
     }
 
+    @Query(() => [UserDTO])
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["users.read"])
+    )
+    async getUsers(){
+        return (await this.userService.getUsers()).map((user) => {
+            return this.userMapper.mapFromModel(user);
+        });
+    }
+
     @Mutation(() => UserDTO)
-    @UseGuards(GqlAuthGuard)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["users.create"])
+    )
     async createUser(@Args("data") dto: CreateUserDTO, @CurrentUser() currentUser: User){
         const createdUser = await this.userService.createUser(currentUser, dto);
         return this.userMapper.mapFromModel(createdUser);

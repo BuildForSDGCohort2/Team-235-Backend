@@ -4,9 +4,11 @@ import { DatabaseModule } from "./shared/database/database.module";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { UserModule } from "./user/user.module";
 import { CategoryModule } from "./category/category.module";
+import { RoleModule } from "./role/role.module";
 
 @Module({
-  imports: [DatabaseModule,
+  imports: [
+    DatabaseModule,
     GraphQLModule.forRoot({
       debug: process.env.NODE_ENV !== "production",
       playground: true,
@@ -17,6 +19,7 @@ import { CategoryModule } from "./category/category.module";
     AuthenticationModule,
     UserModule,
     CategoryModule,
+    RoleModule,
   ],
   controllers: []
 })

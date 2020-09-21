@@ -27,7 +27,7 @@ export class CategoryResolver {
 
     @Query(() => CategoryDTO)
     @UseGuards(GqlAuthGuard)
-    async findByName(
+    async getCategoryByName(
         @Args("name") name: string,
     ) {
         return await this.categoryService.findByName(name);
@@ -35,7 +35,7 @@ export class CategoryResolver {
 
     @Query(() => CategoryDTO)
     @UseGuards(GqlAuthGuard)
-    async find(
+    async getCategoryById(
         @Args("id") id: number,
     ) {
         return await this.categoryService.findById(id);
@@ -44,7 +44,7 @@ export class CategoryResolver {
 
     @Query(() => [CategoryDTO])
     @UseGuards(GqlAuthGuard)
-    async allCategory() {
+    async getCategories() {
         const categories = await this.categoryService.findAll();
 
         let mappedCategories: CategoryDTO[] = [];

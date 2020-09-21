@@ -6,11 +6,12 @@ import { DatabaseModule } from "../shared/database/database.module";
 import { ObjectionModule } from "@willsoto/nestjs-objection";
 import { User } from "./user.model";
 import { UserMapper } from "./user.mapper";
+import { RoleModule } from "src/role/role.module";
 
 @Module({
   imports: [
-    DatabaseModule,
-    ObjectionModule.forFeature([User])
+    ObjectionModule.forFeature([User]),
+    RoleModule
   ],
   providers: [UserResolver, UserMapper, UserService, UserRepository],
   exports: [UserService]

@@ -6,7 +6,7 @@ import { User } from "src/user/user.model";
 @Module({
     imports: [
         ObjectionModule.register({
-            config: knexfile[process.env.NODE_ENV || "development"]
+            config: knexfile[process.env.NODE_ENV || "development"],
         })
     ]
 })
