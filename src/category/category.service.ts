@@ -18,7 +18,7 @@ export class CategoryService {
         const category = new Category();
 
         if (await this.categoryRepository.findByName(dto.name)) {
-            throw new ConflictException(MessageUtil.EXIST_CATEGORY_NAME);
+            throw new ConflictException(MessageUtil.CATEGORY_ALREADY_EXISTS);
         }
         category.name = dto.name;
         category.createdBy = currentUser;

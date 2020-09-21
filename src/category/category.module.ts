@@ -7,11 +7,13 @@ import { DatabaseModule } from "src/shared/database/database.module";
 import { CategoryRepository } from "./category.respository";
 import { CategoryService } from "./category.service";
 import { User } from "src/user/user.model";
+import { UserModule } from "src/user/user.module";
 
 @Module({
   imports: [
     DatabaseModule,
-    ObjectionModule.forFeature([Category, User])
+    UserModule,
+    ObjectionModule.forFeature([Category])
   ],
   providers: [CategoryResolver, CategoryService, CategoryMapper, CategoryRepository],
   exports: []
