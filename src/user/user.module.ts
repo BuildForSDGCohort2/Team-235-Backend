@@ -16,4 +16,4 @@ import { RoleModule } from "src/role/role.module";
   providers: [UserResolver, UserMapper, UserService, UserRepository],
   exports: [UserService]
 })
-export class UserModule {}
+export class UserModule { }

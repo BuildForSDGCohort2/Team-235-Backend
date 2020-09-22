@@ -37,7 +37,4 @@ export class UserRepository implements Repository<string, User> {
   async remove(user: User): Promise<void> {
     await this.userModel.query().delete().where(user);
   }
-
-
-
 }
