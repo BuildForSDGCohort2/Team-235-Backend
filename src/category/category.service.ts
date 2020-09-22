@@ -15,11 +15,12 @@ export class CategoryService {
     async createCategory(
         currentUser: User,
         dto: CreateCategoryDTO) {
-        const category = new Category();
 
         if (await this.categoryRepository.findByName(dto.name)) {
             throw new ConflictException(MessageUtil.CATEGORY_ALREADY_EXISTS);
         }
+        
+        const category = new Category();
         category.name = dto.name;
         category.createdBy = currentUser;
         return await this.categoryRepository.save(category);
