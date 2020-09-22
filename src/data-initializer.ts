@@ -51,7 +51,7 @@ export class DataInitializer {
                     );
                 }
 
-                await Role.query().upsertGraph(superAdminRole, {relate: true})
+                await Role.query().upsertGraph(superAdminRole, {relate: true});
             }
 
             transaction.commit();
