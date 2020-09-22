@@ -25,7 +25,10 @@ export class CategoryRepository implements Repository<number, Category> {
     }
 
     async save(category: Category): Promise<Category> {
-        return await this.categoryModel.query().upsertGraphAndFetch(category, { relate: ["createdBy", "updatedBy"] });
+        return await this.categoryModel.query().upsertGraphAndFetch(category, {
+            relate: true,
+            noDelete: true
+        });
     }
 
     async remove(category: Category): Promise<void> {

@@ -7,7 +7,7 @@ import { CreateCategoryDTO } from "./dto/create-category.dto";
 import { GqlAuthGuard } from "../authentication/gql.auth.guard";
 import { UseGuards } from "@nestjs/common";
 import { User } from "../user/user.model";
-import { PermissionGuard } from "src/role/permission.guard";
+import { PermissionGuard } from "../role/permission.guard";
 
 @Resolver(() => CategoryDTO)
 export class CategoryResolver {
