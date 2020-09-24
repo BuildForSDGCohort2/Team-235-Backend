@@ -5,7 +5,7 @@ import { JwtStrategy } from "./passport.strategy";
 import { AuthenticationService } from "src/authentication/authentication.service";
 import { GqlAuthGuard } from "./gql.auth.guard";
 import { AuthenticationResolver } from "./authentication.resolver";
-import { UserModule } from "src/user/user.module";
+import { UserModule } from "../user/user.module";
 
 @Module({
     imports: [
