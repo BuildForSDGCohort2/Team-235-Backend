@@ -16,14 +16,13 @@ export class RoleMapper implements Mapper<RoleDTO, Role>{
     ){}
 
     mapFromModel(role: Role): RoleDTO {
-        console.log(role);
         return new RoleDTO({
             id: role.id,
             name: role.name,
             permissions: role.permissions
             .map((permission) => this.permissionMapper.mapFromModel(permission)),
             description: role.description,
-            createdBy: role.createdBy == null? null : this.userMapper.mapFromModel(role.createdBy),
+            createdBy: !role.createdBy? null : this.userMapper.mapFromModel(role.createdBy),
             createdAt: Number(moment(role.createdAt).format("x"))
         });
     }

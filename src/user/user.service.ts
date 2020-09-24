@@ -61,7 +61,7 @@ export class UserService {
             return this.roleRepository.find(roleId) ;
         }));
         if(dto.phoneNumber){
-            newUser.phoneNumber = dto.phoneNumber
+            newUser.phoneNumber = dto.phoneNumber;
         }
 
         //TODO: Send confirmation email to user.
