@@ -2,13 +2,14 @@ import moment from "moment";
 import { Mapper } from "src/shared/mapper/mapper";
 import { UserDTO } from "./dto/user.dto";
 import { User } from "./user.model";
-import { Injectable } from "@nestjs/common";
-import { RoleMapper } from "src/role/role.mapper";
+import { forwardRef, Inject, Injectable } from "@nestjs/common";
+import { RoleMapper } from "../role/role.mapper";
 
 @Injectable()
 export class UserMapper implements Mapper<UserDTO, User> {
 
     constructor(
+        @Inject(forwardRef(() => RoleMapper))
         private readonly roleMapper: RoleMapper
     ){}
 

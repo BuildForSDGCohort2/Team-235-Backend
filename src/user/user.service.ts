@@ -39,6 +39,10 @@ export class UserService {
             errors["password"] = MessageUtil.INVALID_PASSWORD;
         }
 
+        if(dto.phoneNumber && !ValidationUtil.isValidPhoneNumber(dto.phoneNumber)){
+            errors["phoneNumber"] = MessageUtil.INVALID_PHONE_NUMBER;
+        }
+
         if (Object.keys(errors).length) {
             throw new BadRequestException(errors);
         }
@@ -56,6 +60,9 @@ export class UserService {
         newUser.roles = await Promise.all(dto.roleIds.map((roleId) => {
             return this.roleRepository.find(roleId) ;
         }));
+        if(dto.phoneNumber){
+            newUser.phoneNumber = dto.phoneNumber;
+        }
 
         //TODO: Send confirmation email to user.
 
