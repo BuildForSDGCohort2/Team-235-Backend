@@ -12,4 +12,6 @@ export class PermissionMapper implements Mapper<PermissionDTO, Permission>{
             description: permission.description
         });
     }
+
+
 }

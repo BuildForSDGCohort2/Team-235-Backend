@@ -111,6 +111,8 @@ export class RoleService {
             return !dto.permissionIds.includes(permission.id);
         });
 
+        console.log(role);
+
         role.updatedBy = currentUser;
         return await this.roleRepository.save(role);
     }
