@@ -5,7 +5,7 @@ import { AuthenticationModule } from "./authentication/authentication.module";
 import { UserModule } from "./user/user.module";
 import { CategoryModule } from "./category/category.module";
 import { RoleModule } from "./role/role.module";
-import { StockModule } from './stock/stock.module';
+import { StockModule } from "./stock/stock.module";
 
 @Module({
   imports: [

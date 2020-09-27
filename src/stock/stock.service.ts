@@ -1,8 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
-import { MessageUtil } from 'src/shared/util/message.util';
-import { User } from 'src/user/user.model';
-import { CreateStockDTO } from './dto/create-stock.dto';
-import { Stock } from './stock.model';
+import { ConflictException, Injectable, NotFoundException } from "@nestjs/common";
+import { MessageUtil } from "src/shared/util/message.util";
+import { User } from "src/user/user.model";
+import { CreateStockDTO } from "./dto/create-stock.dto";
+import { Stock } from "./stock.model";
 import { StockRepository } from "./stock.repository"
 @Injectable()
 export class StockService {
