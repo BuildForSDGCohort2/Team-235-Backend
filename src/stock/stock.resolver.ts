@@ -1,14 +1,14 @@
-import { UseGuards } from "@nestjs/common";
-import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
-import { CurrentUser } from "src/authentication/current-user.decorator";
-import { GqlAuthGuard } from "src/authentication/gql.auth.guard";
-import { User } from "src/user/user.model";
-import { CreateStockDTO } from "./dto/create-stock.dto";
-import { StockDTO } from "./dto/stock.dto";
-import { StockMapper } from "./stock.mapper";
-import { StockService } from "./stock.service";
+import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CurrentUser } from 'src/authentication/current-user.decorator';
+import { GqlAuthGuard } from 'src/authentication/gql.auth.guard';
+import { User } from 'src/user/user.model';
+import { CreateStockDTO } from './dto/create-stock.dto';
+import { StockDTO } from './dto/stock.dto';
+import { StockMapper } from './stock.mapper';
+import { StockService } from './stock.service';
 
-@Resolver("Stock")
+@Resolver('Stock')
 @Resolver(() => StockDTO)
 export class StockResolver {
     constructor(
