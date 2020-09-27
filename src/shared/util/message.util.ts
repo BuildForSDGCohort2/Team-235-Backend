@@ -18,4 +18,6 @@ export class MessageUtil {
     static PERMISSION_NOT_FOUND = "Permission not found.";
     static PERMISSION_DENIED =
         "You do not have permission to perform this operation. Kindly contact an administrator.";
+    static STOCK_ALREADY_EXISTS = "Stock Name Already Exist";
+    static STOCK_NOT_FOUND = "Stock not found";
 }
