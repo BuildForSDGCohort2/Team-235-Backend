@@ -1,4 +1,4 @@
-import { InputType, Field } from "@nestjs/graphql";
+import { InputType, Field, Int } from "@nestjs/graphql";
 
 @InputType("StockInfo")
 export class CreateStockDTO {
@@ -7,5 +7,8 @@ export class CreateStockDTO {
     readonly name: string
 
     @Field()
-    readonly quantity: string
+    readonly quantity: number
+
+    @Field(() => [Int])
+    readonly categoryIds: number[]
 }

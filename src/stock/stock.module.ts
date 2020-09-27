@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ObjectionModule } from "@willsoto/nestjs-objection";
+import { CategoryModule } from "src/category/category.module";
 import { DatabaseModule } from "src/shared/database/database.module";
 import { UserModule } from "src/user/user.module";
 import { StockMapper } from "./stock.mapper";
@@ -12,6 +13,7 @@ import { StockService } from "./stock.service";
   imports: [
     DatabaseModule,
     UserModule,
+    CategoryModule,
     ObjectionModule.forFeature([Stock])
   ],
   providers: [StockResolver, StockService, StockMapper, StockRepository]

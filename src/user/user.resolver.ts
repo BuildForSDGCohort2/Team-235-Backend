@@ -39,8 +39,8 @@ export class UserResolver {
         GqlAuthGuard,
         PermissionGuard(["users.read"])
     )
-    async getUserById(@Args("data") dto: {id: string}){
-        const user = await this.userService.getProfile(dto.id)
+    async getUserById(@Args("data") id: string){
+        const user = await this.userService.getProfile(id)
         return this.userMapper.mapFromModel(user);
     }
 
