@@ -1,7 +1,6 @@
 import { Injectable, Inject } from "@nestjs/common";
 import { Repository } from "../shared/repository/repository";
 import { Role } from "./role.model";
-import { User } from "src/user/user.model";
 
 @Injectable()
 export class RoleRepository implements Repository<number, Role> {
@@ -27,7 +26,8 @@ export class RoleRepository implements Repository<number, Role> {
 
     async save(role: Role): Promise<Role> {
         return await this.roleModel.query().upsertGraphAndFetch(role, {
-            relate: true
+            relate: true,
+            noDelete: true,
         });
     }
 

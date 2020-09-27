@@ -15,9 +15,4 @@ export class UpdateRoleDTO{
         nullable: true
     })
     description?: string;
-
-    @Field(() => [Int], {
-        nullable: true
-    })
-    permissionIds?: number[]
 }

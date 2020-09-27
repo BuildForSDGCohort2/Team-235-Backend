@@ -36,7 +36,12 @@ export class DataInitializer {
                 user.roles = await Role.query();
                 user.verifiedAt = moment().toISOString();
                 user.password = await bcrypt.hash(String(process.env.ADMIN_SEEDER_PASSWORD), 10);
-            
+
+                await User.query().upsertGraph(user, {
+                    relate: true,
+                    noUpdate: true,
+                    noDelete: true
+                });
             }
             else{
                 const superAdminRole = user.roles[0];
@@ -45,13 +50,9 @@ export class DataInitializer {
                         _.differenceBy(permissions, superAdminRole.permissions, "id")
                     );
                 }
-            }
 
-            await User.query().upsertGraph(user, {
-                relate: true,
-                noUpdate: true,
-                noDelete: true
-            });
+                await Role.query().upsertGraph(superAdminRole, {relate: true});
+            }
 
             transaction.commit();
         }catch(e){

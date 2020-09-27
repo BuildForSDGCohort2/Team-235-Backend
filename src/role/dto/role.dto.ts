@@ -1,4 +1,5 @@
 import { ObjectType, Field } from "@nestjs/graphql";
+import { UserDTO } from "src/user/dto/user.dto";
 import { PermissionDTO } from "./permission.dto";
 
 @ObjectType("Role")
@@ -8,7 +9,8 @@ export class RoleDTO {
         id: number,
         name: string,
         description: string,
-        permissions: PermissionDTO[]
+        permissions: PermissionDTO[],
+        createdBy: UserDTO,
         createdAt: number
     }){
         Object.assign(this, data);
@@ -25,6 +27,11 @@ export class RoleDTO {
 
     @Field(() => [PermissionDTO])
     permissions: PermissionDTO[];
+
+    @Field(() => UserDTO, {
+        nullable: true
+    })
+    createdBy: UserDTO
 
     @Field()
     createdAt: number;

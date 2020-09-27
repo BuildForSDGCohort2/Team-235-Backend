@@ -7,8 +7,8 @@ import { CreateCategoryDTO } from "./dto/create-category.dto";
 import { GqlAuthGuard } from "../authentication/gql.auth.guard";
 import { UseGuards } from "@nestjs/common";
 import { User } from "../user/user.model";
+import { PermissionGuard } from "../role/permission.guard";
 
-@Resolver("Category")
 @Resolver(() => CategoryDTO)
 export class CategoryResolver {
     constructor(
@@ -17,7 +17,10 @@ export class CategoryResolver {
     ) { }
 
     @Mutation(() => CategoryDTO)
-    @UseGuards(GqlAuthGuard)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["categories.create"])
+    )
     async createCategory(
         @Args("data") dto: CreateCategoryDTO, @CurrentUser() currentUser: User
     ) {
@@ -26,7 +29,11 @@ export class CategoryResolver {
     }
 
     @Query(() => CategoryDTO)
-    @UseGuards(GqlAuthGuard)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["categories.read"])
+    )
+
     async getCategoryByName(
         @Args("name") name: string,
     ) {
@@ -34,7 +41,10 @@ export class CategoryResolver {
     }
 
     @Query(() => CategoryDTO)
-    @UseGuards(GqlAuthGuard)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["categories.read"])
+    )
     async getCategoryById(
         @Args("id") id: number,
     ) {
@@ -43,7 +53,10 @@ export class CategoryResolver {
 
 
     @Query(() => [CategoryDTO])
-    @UseGuards(GqlAuthGuard)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["categories.read"])
+    )
     async getCategories() {
         const categories = await this.categoryService.findAll();
 

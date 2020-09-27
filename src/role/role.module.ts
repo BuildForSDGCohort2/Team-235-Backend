@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 import { RoleService } from "./role.service";
 import { RoleResolver } from "./role.resolver";
 import { ObjectionModule } from "@willsoto/nestjs-objection";
@@ -8,9 +8,11 @@ import { RoleMapper } from "./role.mapper";
 import { PermissionRepository } from "./permission.repository";
 import { PermissionMapper } from "./permission.mapper";
 import { Permission } from "./permission.model";
+import { UserModule } from "../user/user.module";
 
 @Module({
   imports: [
+    forwardRef(() => UserModule),
     ObjectionModule.forFeature([Role, Permission])
   ],
   providers: [
