@@ -1,11 +1,12 @@
 import { ObjectType, Field } from "@nestjs/graphql";
 
-@ObjectType("Stock")
-export class CategoryDTO {
+@ObjectType("Category")
+export class StockDTO {
 
     constructor(data: {
         id: number,
         name: string,
+        quantity: number,
         createdAt: number
     }) {
         Object.assign(this, data);
@@ -16,6 +17,9 @@ export class CategoryDTO {
 
     @Field()
     name: string;
+
+    @Field()
+    quantity: number;
 
 
     @Field()
