@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Mapper } from "src/shared/mapper/mapper";
+import { Mapper } from "../shared/mapper/mapper";
 import { StockDTO } from "./dto/stock.dto";
 import { Stock } from "./stock.model";
 
