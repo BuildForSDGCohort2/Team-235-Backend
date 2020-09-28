@@ -12,6 +12,7 @@ import { PermissionMapper } from "./permission.mapper";
 import { PermissionGuard as PermissionGuard } from "./permission.guard";
 import { UpdateRoleDTO } from "./dto/update-role.dto";
 import { ModifyRolePermissionsDTO } from "./dto/modify-role-permissions.dto";
+import { idText } from "typescript";
 
 @Resolver(() => [PermissionDTO, RoleDTO])
 export class RoleResolver {
@@ -40,6 +41,16 @@ export class RoleResolver {
     async getRoles(){
         return (await this.roleService.getRoles())
         .map((role) => this.roleMapper.mapFromModel(role));
+    }
+
+    @Query(() => RoleDTO)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["roles.read"])
+    )
+    async getRoleById(@Args("data") id: number){
+        const role = await this.roleService.getRoleById(id);
+        return this.roleMapper.mapFromModel(role);
     }
 
     @Mutation(() => RoleDTO)

@@ -34,6 +34,16 @@ export class UserResolver {
         });
     }
 
+    @Query(() => UserDTO)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["users.read"])
+    )
+    async getUserById(@Args("data") id: string){
+        const user = await this.userService.getProfile(id)
+        return this.userMapper.mapFromModel(user);
+    }
+
     @Mutation(() => UserDTO)
     @UseGuards(
         GqlAuthGuard,

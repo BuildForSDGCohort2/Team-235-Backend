@@ -1,6 +1,6 @@
 import { ObjectType, Field } from "@nestjs/graphql";
 
-@ObjectType("Stock")
+@ObjectType("Category")
 export class CategoryDTO {
 
     constructor(data: {

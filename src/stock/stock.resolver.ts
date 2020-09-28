@@ -2,6 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CurrentUser } from 'src/authentication/current-user.decorator';
 import { GqlAuthGuard } from 'src/authentication/gql.auth.guard';
+import { PermissionGuard } from "src/role/permission.guard";
 import { User } from 'src/user/user.model';
 import { CreateStockDTO } from './dto/create-stock.dto';
 import { StockDTO } from './dto/stock.dto';
@@ -19,16 +20,22 @@ export class StockResolver {
 
 
     @Mutation(() => StockDTO)
-    @UseGuards(GqlAuthGuard)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["stock.create"])
+    )
     async createStock(
         @Args("data") dto: CreateStockDTO, @CurrentUser() currentUser: User
     ) {
         const createdStock = await this.stockService.createStock(currentUser, dto);
-        return await this.stockMapper.mapFromModel(createdStock);
+        return this.stockMapper.mapFromModel(createdStock);
     }
 
     @Query(() => StockDTO)
-    @UseGuards(GqlAuthGuard)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["stock.read"])
+    )
     async getStockByName(
         @Args("name") name: string,
     ) {
@@ -36,7 +43,10 @@ export class StockResolver {
     }
 
     @Query(() => StockDTO)
-    @UseGuards(GqlAuthGuard)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["stock.read"])
+    )
     async getStockById(
         @Args("id") id: number,
     ) {
@@ -45,17 +55,23 @@ export class StockResolver {
 
 
     @Query(() => [StockDTO])
-    @UseGuards(GqlAuthGuard)
-    async getStock() {
-        const categories = await this.stockService.findAll();
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["stock.read"])
+    )
+    async getStocks() {
+        const stocks = await this.stockService.findAll();
+        return stocks.map(stock => this.stockMapper.mapFromModel(stock));
+    }
 
-        let mappedCategories: StockDTO[] = [];
-
-        for (const category of categories) {
-            const mapped = await this.stockMapper.mapFromModel(category);
-            mappedCategories.push(mapped);
-        }
-
-        return mappedCategories;
+    @Query(() => [StockDTO])
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["stock.read"])
+    )
+    async getStocksByCategoryId(@Args("data") id: number){
+        return (await this.stockService.getStocksByCategoryId(id)).map(stock => {
+            return this.stockMapper.mapFromModel(stock);
+        })
     }
 }
