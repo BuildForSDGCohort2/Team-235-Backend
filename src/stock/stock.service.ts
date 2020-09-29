@@ -20,7 +20,7 @@ export class StockService {
         dto: CreateStockDTO) {
         const stock = new Stock();
 
-        if(!(dto && dto.name && dto.quantity && dto.categoryIds.length)){
+        if (!(dto && dto.name && dto.quantity && dto.categoryIds.length)) {
             throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
         }
 
@@ -32,7 +32,7 @@ export class StockService {
         stock.createdBy = currentUser;
         stock.categories = await Promise.all(
             dto.categoryIds.map(categoryId => {
-                return this.categoryService.findById(categoryId)
+                return this.categoryService.findById(categoryId);
             })
         )
 
@@ -63,10 +63,10 @@ export class StockService {
 
     async getStocksByCategoryId(id: number): Promise<Stock[]> {
         return (await this.stockRepository.findAll())
-        .filter(stock => {
-            const filtered = stock.categories.filter(category => category.id == id);
-            return filtered.length;
-        })
+            .filter((stock) => {
+                const filtered = stock.categories.filter((category) => category.id === id);
+                return filtered.length;
+            });
     }
 
 }

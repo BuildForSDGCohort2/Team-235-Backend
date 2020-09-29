@@ -1,15 +1,15 @@
-import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CurrentUser } from 'src/authentication/current-user.decorator';
-import { GqlAuthGuard } from 'src/authentication/gql.auth.guard';
+import { UseGuards } from "@nestjs/common";
+import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { CurrentUser } from "src/authentication/current-user.decorator";
+import { GqlAuthGuard } from "src/authentication/gql.auth.guard";
 import { PermissionGuard } from "src/role/permission.guard";
-import { User } from 'src/user/user.model';
-import { CreateStockDTO } from './dto/create-stock.dto';
-import { StockDTO } from './dto/stock.dto';
-import { StockMapper } from './stock.mapper';
-import { StockService } from './stock.service';
+import { User } from "src/user/user.model";
+import { CreateStockDTO } from "./dto/create-stock.dto";
+import { StockDTO } from "./dto/stock.dto";
+import { StockMapper } from "./stock.mapper";
+import { StockService } from "./stock.service";
 
-@Resolver('Stock')
+@Resolver("Stock")
 @Resolver(() => StockDTO)
 export class StockResolver {
     constructor(
@@ -69,9 +69,9 @@ export class StockResolver {
         GqlAuthGuard,
         PermissionGuard(["stock.read"])
     )
-    async getStocksByCategoryId(@Args("data") id: number){
-        return (await this.stockService.getStocksByCategoryId(id)).map(stock => {
+    async getStocksByCategoryId(@Args("data") id: number) {
+        return (await this.stockService.getStocksByCategoryId(id)).map((stock) => {
             return this.stockMapper.mapFromModel(stock);
-        })
+        });
     }
 }
