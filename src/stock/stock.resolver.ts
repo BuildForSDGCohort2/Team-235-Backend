@@ -61,7 +61,7 @@ export class StockResolver {
     )
     async getStocks() {
         const stocks = await this.stockService.findAll();
-        return stocks.map(stock => this.stockMapper.mapFromModel(stock));
+        return stocks.map((stock) => this.stockMapper.mapFromModel(stock));
     }
 
     @Query(() => [StockDTO])

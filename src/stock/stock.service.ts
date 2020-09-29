@@ -4,7 +4,7 @@ import { MessageUtil } from "../shared/util/message.util";
 import { User } from "../user/user.model";
 import { CreateStockDTO } from "./dto/create-stock.dto";
 import { Stock } from "./stock.model";
-import { StockRepository } from "./stock.repository"
+import { StockRepository } from "./stock.repository";
 @Injectable()
 export class StockService {
 
@@ -31,10 +31,10 @@ export class StockService {
         stock.quantity = dto.quantity;
         stock.createdBy = currentUser;
         stock.categories = await Promise.all(
-            dto.categoryIds.map(categoryId => {
+            dto.categoryIds.map((categoryId) => {
                 return this.categoryService.findById(categoryId);
             })
-        )
+        );
 
         return await this.stockRepository.save(stock);
     }
