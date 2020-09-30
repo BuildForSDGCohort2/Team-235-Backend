@@ -9,7 +9,6 @@ import { StockDTO } from "./dto/stock.dto";
 import { StockMapper } from "./stock.mapper";
 import { StockService } from "./stock.service";
 
-@Resolver("Stock")
 @Resolver(() => StockDTO)
 export class StockResolver {
     constructor(
