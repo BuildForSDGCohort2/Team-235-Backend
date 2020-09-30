@@ -27,6 +27,10 @@ export class RoleService {
         return await this.roleRepository.findAll();
     }
 
+    async getRoleById(id: number) {
+        return await this.roleRepository.find(id);
+    }
+
     async create(dto: CreateRoleDTO, currentUser: User){
 
         const errors: Record<string, string> = {};
