@@ -6,7 +6,6 @@ import { ObjectionModule } from "@willsoto/nestjs-objection";
 import { DatabaseModule } from "src/shared/database/database.module";
 import { CategoryRepository } from "./category.respository";
 import { CategoryService } from "./category.service";
-import { User } from "src/user/user.model";
 import { UserModule } from "src/user/user.module";
 
 @Module({
@@ -16,6 +15,6 @@ import { UserModule } from "src/user/user.module";
     ObjectionModule.forFeature([Category])
   ],
   providers: [CategoryResolver, CategoryService, CategoryMapper, CategoryRepository],
-  exports: []
+  exports: [CategoryService, CategoryMapper]
 })
 export class CategoryModule { }

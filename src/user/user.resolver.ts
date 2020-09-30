@@ -15,12 +15,12 @@ export class UserResolver {
     constructor(
         private readonly userService: UserService,
         private readonly userMapper: UserMapper
-    ){}
+    ) { }
 
     @Query(() => UserDTO)
     @UseGuards(GqlAuthGuard)
     whoAmI(@CurrentUser() currentUser: User): UserDTO {
-      return this.userMapper.mapFromModel(currentUser);
+        return this.userMapper.mapFromModel(currentUser);
     }
 
     @Query(() => [UserDTO])
@@ -28,10 +28,20 @@ export class UserResolver {
         GqlAuthGuard,
         PermissionGuard(["users.read"])
     )
-    async getUsers(){
+    async getUsers() {
         return (await this.userService.getUsers()).map((user) => {
             return this.userMapper.mapFromModel(user);
         });
+    }
+
+    @Query(() => UserDTO)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["users.read"])
+    )
+    async getUserById(@Args("data") id: string) {
+        const user = await this.userService.getProfile(id);
+        return this.userMapper.mapFromModel(user);
     }
 
     @Mutation(() => UserDTO)
@@ -39,7 +49,7 @@ export class UserResolver {
         GqlAuthGuard,
         PermissionGuard(["users.create"])
     )
-    async createUser(@Args("data") dto: CreateUserDTO, @CurrentUser() currentUser: User){
+    async createUser(@Args("data") dto: CreateUserDTO, @CurrentUser() currentUser: User) {
         const createdUser = await this.userService.createUser(currentUser, dto);
         return this.userMapper.mapFromModel(createdUser);
     }
