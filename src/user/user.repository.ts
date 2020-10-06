@@ -33,7 +33,7 @@ export class UserRepository implements Repository<string, User> {
       return await this.userModel.query().upsertGraphAndFetch(user, {
         relate: true,
         noDelete: true
-      })
+      });
     }
     return await this.userModel.query().upsertGraphAndFetch(user, { 
       relate: true,
