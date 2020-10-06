@@ -5,6 +5,7 @@ export class MessageUtil {
     static INVALID_EMAIL_ADDRESS = "Invalid email address.";
     static INVALID_PHONE_NUMBER = "Invalid phone number."
     static INVALID_PASSWORD = "Password must be at least 6 characters.";
+    static USER_NOT_FOUND = "User not found."
     static USER_ALREADY_EXISTS = "An user with this email already exists."
     static INVALID_CREDENTIALS = "Invalid credentials."
     static INVALID_AUTHORIZATION_TOKEN = "The access token provided is either expired, revoked, malformed, or invalid."
