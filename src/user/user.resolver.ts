@@ -8,6 +8,7 @@ import { CurrentUser } from "../authentication/current-user.decorator";
 import { User } from "./user.model";
 import { UserMapper } from "./user.mapper";
 import { PermissionGuard } from "src/role/permission.guard";
+import { UpdateUserDTO } from "./dto/update-user.dto";
 
 @Resolver(() => UserDTO)
 export class UserResolver {
@@ -52,6 +53,16 @@ export class UserResolver {
     async createUser(@Args("data") dto: CreateUserDTO, @CurrentUser() currentUser: User){
         const createdUser = await this.userService.createUser(currentUser, dto);
         return this.userMapper.mapFromModel(createdUser);
+    }
+
+    @Mutation(() => UserDTO)
+    @UseGuards(
+        GqlAuthGuard,
+        PermissionGuard(["users.update"])
+    )
+    async updateUser(@Args("data") dto: UpdateUserDTO, @CurrentUser() currentUser: User){
+        const updatedUser = await this.userService.updateUser(currentUser, dto);
+        return this.userMapper.mapFromModel(updatedUser);
     }
 
 }

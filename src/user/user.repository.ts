@@ -4,6 +4,9 @@ import { Repository } from "src/shared/repository/repository";
 
 @Injectable()
 export class UserRepository implements Repository<string, User> {
+  update(arg0: any): User | PromiseLike<User> {
+      throw new Error("Method not implemented.");
+  }
 
   constructor(
     @Inject(User)
@@ -26,6 +29,12 @@ export class UserRepository implements Repository<string, User> {
 
 
   async save(user: User): Promise<User> {
+    if(user.id && await this.find(user.id)){
+      await this.userModel.query().upsertGraphAndFetch(user, {
+        relate: true,
+        noDelete: true
+      })
+    }
     return await this.userModel.query().upsertGraphAndFetch(user, { 
       relate: true,
       noUpdate: true,
