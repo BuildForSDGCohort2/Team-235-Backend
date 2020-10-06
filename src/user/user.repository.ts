@@ -30,7 +30,7 @@ export class UserRepository implements Repository<string, User> {
 
   async save(user: User): Promise<User> {
     if(user.id && await this.find(user.id)){
-      await this.userModel.query().upsertGraphAndFetch(user, {
+      return await this.userModel.query().upsertGraphAndFetch(user, {
         relate: true,
         noDelete: true
       })
