@@ -1,4 +1,5 @@
 import { Injectable, BadRequestException, ConflictException } from "@nestjs/common";
+import _ from "lodash";
 import bcrypt from "bcrypt";
 import { UserRepository } from "./user.repository";
 import { User } from "./user.model";
@@ -7,9 +8,11 @@ import { ValidationUtil } from "../shared/util/validation.util";
 import { CreateUserDTO } from "./dto/create-user.dto";
 import { Role } from "src/role/role.model";
 import { RoleRepository } from "src/role/role.repository";
+import { UpdateUserDTO } from "./dto/update-user.dto";
 
 @Injectable()
 export class UserService {
+
     constructor(
         private readonly userRepository: UserRepository,
         private readonly roleRepository: RoleRepository
@@ -67,6 +70,21 @@ export class UserService {
         //TODO: Send confirmation email to user.
 
         return await this.userRepository.save(newUser);
+    }
+
+    async updateUser(currentUser: User, dto: UpdateUserDTO): Promise<User> {
+        const user = await this.userRepository.find(dto.id)
+        if(!user){
+            throw new BadRequestException(MessageUtil.USER_NOT_FOUND);
+        }
+
+        if(user.id != currentUser.id){
+            user.updatedBy = currentUser;
+        }
+
+        return await this.userRepository.save(
+            _.merge(user, dto)
+        )
     }
 
     async getUsers(): Promise<User[]>{
