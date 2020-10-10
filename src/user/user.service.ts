@@ -73,18 +73,23 @@ export class UserService {
     }
 
     async updateUser(currentUser: User, dto: UpdateUserDTO): Promise<User> {
-        const user = await this.userRepository.find(dto.id)
+
+        if(!dto.id){
+            throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
+        }
+
+        const user = await this.userRepository.find(dto.id);
         if(!user){
             throw new BadRequestException(MessageUtil.USER_NOT_FOUND);
         }
 
-        if(user.id != currentUser.id){
+        if(user.id !== currentUser.id){
             user.updatedBy = currentUser;
         }
 
         return await this.userRepository.save(
             _.merge(user, dto)
-        )
+        );
     }
 
     async getUsers(): Promise<User[]>{
