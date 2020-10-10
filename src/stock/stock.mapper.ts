@@ -10,15 +10,15 @@ export class StockMapper implements Mapper<StockDTO, Stock> {
 
     constructor(
         private readonly categoryMapper: CategoryMapper
-    ){}
+    ) { }
 
     mapFromModel(stock: Stock): StockDTO {
         return new StockDTO({
             id: stock.id,
             name: stock.name,
             quantity: stock.quantity,
-            categories: stock.categories.map(category => {
-                return this.categoryMapper.mapFromModel(category)
+            categories: stock.categories.map((category) => {
+                return this.categoryMapper.mapFromModel(category);
             }),
             createdAt: Number(moment(stock.createdAt).format("x")),
         });

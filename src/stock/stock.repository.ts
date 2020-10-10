@@ -26,8 +26,7 @@ export class StockRepository implements Repository<number, Stock> {
     }
 
     async save(stock: Stock): Promise<Stock> {
-        console.log(stock);
-        return await this.stockModel.query().upsertGraphAndFetch(stock, { 
+        return await this.stockModel.query().upsertGraphAndFetch(stock, {
             relate: true,
             noDelete: true
         });

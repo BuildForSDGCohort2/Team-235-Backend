@@ -12,7 +12,6 @@ import { PermissionMapper } from "./permission.mapper";
 import { PermissionGuard as PermissionGuard } from "./permission.guard";
 import { UpdateRoleDTO } from "./dto/update-role.dto";
 import { ModifyRolePermissionsDTO } from "./dto/modify-role-permissions.dto";
-import { idText } from "typescript";
 
 @Resolver(() => [PermissionDTO, RoleDTO])
 export class RoleResolver {
@@ -21,26 +20,26 @@ export class RoleResolver {
         private readonly roleService: RoleService,
         private readonly permissionMapper: PermissionMapper,
         private readonly roleMapper: RoleMapper,
-    ){}
+    ) { }
 
     @Query(() => [PermissionDTO])
     @UseGuards(
         GqlAuthGuard,
         PermissionGuard(["permissions.read"])
     )
-    async getPermissions(){
+    async getPermissions() {
         return (await this.roleService.getPermissions())
-        .map((permission) => this.permissionMapper.mapFromModel(permission));
+            .map((permission) => this.permissionMapper.mapFromModel(permission));
     }
 
     @Query(() => [RoleDTO])
     @UseGuards(
-        GqlAuthGuard, 
+        GqlAuthGuard,
         PermissionGuard(["roles.read"])
     )
-    async getRoles(){
+    async getRoles() {
         return (await this.roleService.getRoles())
-        .map((role) => this.roleMapper.mapFromModel(role));
+            .map((role) => this.roleMapper.mapFromModel(role));
     }
 
     @Query(() => RoleDTO)
@@ -48,7 +47,7 @@ export class RoleResolver {
         GqlAuthGuard,
         PermissionGuard(["roles.read"])
     )
-    async getRoleById(@Args("data") id: number){
+    async getRoleById(@Args("data") id: number) {
         const role = await this.roleService.getRoleById(id);
         return this.roleMapper.mapFromModel(role);
     }
@@ -58,7 +57,7 @@ export class RoleResolver {
         GqlAuthGuard,
         PermissionGuard(["roles.create"])
     )
-    async createRole(@Args("data") dto: CreateRoleDTO, @CurrentUser() currentUser: User){
+    async createRole(@Args("data") dto: CreateRoleDTO, @CurrentUser() currentUser: User) {
         const role = await this.roleService.create(dto, currentUser);
         return this.roleMapper.mapFromModel(role);
     }
@@ -68,7 +67,7 @@ export class RoleResolver {
         GqlAuthGuard,
         PermissionGuard(["roles.update"])
     )
-    async updateRole(@Args("data") dto: UpdateRoleDTO, @CurrentUser() currentUser: User){
+    async updateRole(@Args("data") dto: UpdateRoleDTO, @CurrentUser() currentUser: User) {
         const role = await this.roleService.update(dto, currentUser);
         return this.roleMapper.mapFromModel(role);
     }
@@ -79,7 +78,7 @@ export class RoleResolver {
         GqlAuthGuard,
         PermissionGuard(["roles.update"])
     )
-    async addPermissionsToRole(@Args("data") dto: ModifyRolePermissionsDTO, @CurrentUser() currentUser: User){
+    async addPermissionsToRole(@Args("data") dto: ModifyRolePermissionsDTO, @CurrentUser() currentUser: User) {
         const role = await this.roleService.addPermissionsToRole(dto, currentUser);
         return this.roleMapper.mapFromModel(role);
     }
@@ -90,10 +89,10 @@ export class RoleResolver {
         GqlAuthGuard,
         PermissionGuard(["roles.update"])
     )
-    async removePermissionsFromRole(@Args("data") dto: ModifyRolePermissionsDTO, @CurrentUser() currentUser: User){
+    async removePermissionsFromRole(@Args("data") dto: ModifyRolePermissionsDTO, @CurrentUser() currentUser: User) {
         const role = await this.roleService.removePermissionsFromRole(dto, currentUser);
         return this.roleMapper.mapFromModel(role);
     }
-    
+
 
 }

@@ -4,7 +4,7 @@ import { MessageUtil } from "../shared/util/message.util";
 import { User } from "../user/user.model";
 import { CreateStockDTO } from "./dto/create-stock.dto";
 import { Stock } from "./stock.model";
-import { StockRepository } from "./stock.repository"
+import { StockRepository } from "./stock.repository";
 @Injectable()
 export class StockService {
 
@@ -20,7 +20,7 @@ export class StockService {
         dto: CreateStockDTO) {
         const stock = new Stock();
 
-        if(!(dto && dto.name && dto.quantity && dto.categoryIds.length)){
+        if (!(dto && dto.name && dto.quantity && dto.categoryIds.length)) {
             throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
         }
 
@@ -31,10 +31,10 @@ export class StockService {
         stock.quantity = dto.quantity;
         stock.createdBy = currentUser;
         stock.categories = await Promise.all(
-            dto.categoryIds.map(categoryId => {
-                return this.categoryService.findById(categoryId)
+            dto.categoryIds.map((categoryId) => {
+                return this.categoryService.findById(categoryId);
             })
-        )
+        );
 
         return await this.stockRepository.save(stock);
     }
@@ -63,10 +63,10 @@ export class StockService {
 
     async getStocksByCategoryId(id: number): Promise<Stock[]> {
         return (await this.stockRepository.findAll())
-        .filter(stock => {
-            const filtered = stock.categories.filter(category => category.id == id);
-            return filtered.length;
-        })
+            .filter((stock) => {
+                const filtered = stock.categories.filter((category) => category.id === id);
+                return filtered.length;
+            });
     }
 
 }
