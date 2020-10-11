@@ -26,7 +26,7 @@ export class User extends Model {
   static relationMappings = {
     roles: {
       relation: Model.ManyToManyRelation,
-      modelClass: Role,
+      modelClass: __dirname + "/../role/role.model",
       join: {
         from: "users.id",
         through: {
