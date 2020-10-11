@@ -9,7 +9,7 @@ import { StockModule } from "./stock/stock.module";
 
 @Module({
   imports: [
-    //DatabaseModule,
+    DatabaseModule,
     GraphQLModule.forRoot({
       debug: process.env.NODE_ENV !== "production",
       playground: true,
