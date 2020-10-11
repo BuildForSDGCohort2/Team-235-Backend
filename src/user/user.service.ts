@@ -42,7 +42,7 @@ export class UserService {
             errors["password"] = MessageUtil.INVALID_PASSWORD;
         }
 
-        if(dto.phoneNumber && !ValidationUtil.isValidPhoneNumber(dto.phoneNumber)){
+        if (dto.phoneNumber && !ValidationUtil.isValidPhoneNumber(dto.phoneNumber)) {
             errors["phoneNumber"] = MessageUtil.INVALID_PHONE_NUMBER;
         }
 
@@ -61,9 +61,9 @@ export class UserService {
         newUser.password = await bcrypt.hash(dto.password, 10);
         newUser.createdBy = currentUser;
         newUser.roles = await Promise.all(dto.roleIds.map((roleId) => {
-            return this.roleRepository.find(roleId) ;
+            return this.roleRepository.find(roleId);
         }));
-        if(dto.phoneNumber){
+        if (dto.phoneNumber) {
             newUser.phoneNumber = dto.phoneNumber;
         }
 
@@ -73,12 +73,15 @@ export class UserService {
     }
 
     async updateUser(currentUser: User, dto: UpdateUserDTO): Promise<User> {
+        if (!dto.id) {
+            throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
+        }
         const user = await this.userRepository.find(dto.id);
-        if(!user){
+        if (!user) {
             throw new BadRequestException(MessageUtil.USER_NOT_FOUND);
         }
 
-        if(user.id !== currentUser.id){
+        if (user.id !== currentUser.id) {
             user.updatedBy = currentUser;
         }
 
@@ -87,7 +90,7 @@ export class UserService {
         );
     }
 
-    async getUsers(): Promise<User[]>{
+    async getUsers(): Promise<User[]> {
         return await this.userRepository.findAll();
     }
 
@@ -99,9 +102,9 @@ export class UserService {
         return this.userRepository.findByEmail(email);
     }
 
-    async assignRolesToUser(roleIds: number[], user: User){
-        
+    async assignRolesToUser(roleIds: number[], user: User) {
+
     }
 
-    async removeRolesFromUser(roleIds: number[], user: User){}
+    async removeRolesFromUser(roleIds: number[], user: User) { }
 }
