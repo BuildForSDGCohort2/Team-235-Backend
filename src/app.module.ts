@@ -19,9 +19,9 @@ import { StockModule } from "./stock/stock.module";
     }),
     AuthenticationModule,
     UserModule,
-    // CategoryModule,
-    // RoleModule,
-    // StockModule,
+    CategoryModule,
+    RoleModule,
+    StockModule,
   ],
   controllers: []
 })
