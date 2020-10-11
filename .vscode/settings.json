@@ -1,6 +1,0 @@
-{
-    "javascript.format.semicolons": "insert",
-    "javascript.preferences.quoteStyle": "double",
-    "typescript.preferences.quoteStyle": "double",
-    "general.quoteStyle": "Double quotes"
-}
