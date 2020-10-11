@@ -22,7 +22,7 @@ export class StockRepository implements Repository<number, Stock> {
 
     async findAll(): Promise<Stock[]> {
         return await this.stockModel.query()
-            .withGraphFetched("*");
+        .withGraphFetched("[createdBy, updatedBy]");
     }
 
     async save(stock: Stock): Promise<Stock> {
