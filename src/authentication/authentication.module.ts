@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 import { JwtStrategy } from "./passport.strategy";
@@ -16,7 +16,7 @@ import { UserModule } from "../user/user.module";
                 expiresIn: Number(process.env.JWT_EXPIRES_IN),
             },
         }),
-        UserModule,
+        forwardRef(() =>UserModule),
     ],
     providers: [AuthenticationService, JwtStrategy, GqlAuthGuard, AuthenticationResolver],
     exports: [JwtStrategy, PassportModule, GqlAuthGuard],

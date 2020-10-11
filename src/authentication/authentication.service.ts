@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException, BadRequestException, ForbiddenException } from "@nestjs/common";
+import { Injectable, UnauthorizedException, BadRequestException, ForbiddenException, Inject, forwardRef } from "@nestjs/common";
 import bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import { LoginCredentialsDTO } from "src/authentication/dto/login-credentials.dto";
@@ -12,6 +12,7 @@ import { JWTPayload } from "./jwt-payload.interface";
 @Injectable()
 export class AuthenticationService {
   constructor(
+    @Inject(forwardRef(() => UserService))
     private userService: UserService,
     private jwtService: JwtService,
   ) { }
