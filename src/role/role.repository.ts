@@ -16,7 +16,8 @@ export class RoleRepository implements Repository<number, Role> {
     }
 
     async findByName(name: string): Promise<Role>{
-        return await this.roleModel.query().findOne({name});
+        return await this.roleModel.query().findOne({name})
+        .withGraphFetched("[permissions, createdBy, updatedBy]");
     }
 
     async findAll(): Promise<Role[]> {
