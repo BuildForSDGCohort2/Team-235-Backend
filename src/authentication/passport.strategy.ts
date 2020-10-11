@@ -5,7 +5,6 @@ import { User } from "../user/user.model";
 import { UserRepository } from "../user/user.repository";
 import { JWTPayload } from "./jwt-payload.interface";
 import { UserService } from "src/user/user.service";
-import { MessageUtil } from "src/shared/util/message.util";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -19,6 +18,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JWTPayload): Promise<User> {
-    return await this.userService.getProfile(payload.sub);
+    const user = await this.userService.getProfile(payload.sub);
+    console.log(user);
+    return user;
   }
 }

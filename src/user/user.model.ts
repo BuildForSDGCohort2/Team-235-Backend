@@ -22,6 +22,7 @@ export class User extends Model {
   updatedAt: string = moment().toISOString();
   updatedBy: User;
 
+  
 
   static relationMappings = {
     roles: {
@@ -38,18 +39,18 @@ export class User extends Model {
     },
     createdBy: {
       relation: Model.BelongsToOneRelation,
-      modelClass: User,
+      modelClass: __dirname + "/user.model",
       join: {
-        from: `${User.tableName}.createdById`,
-        to: `${User.tableName}.id`
+        from: `users.createdById`,
+        to: `users.id`
       }
     },
     updatedBy: {
       relation: Model.BelongsToOneRelation,
       modelClass: User,
       join: {
-        from: `${User.tableName}.updatedById`,
-        to: `${User.tableName}.id`
+        from: `users.updatedById`,
+        to: `users.id`
       }
     }
   }

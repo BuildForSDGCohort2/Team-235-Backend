@@ -15,7 +15,7 @@ export class UserRepository implements Repository<string, User> {
 
   async find(id: string): Promise<User> {
     return await this.userModel.query().findById(id)
-      .withGraphFetched("*");
+      .withGraphFetched("[roles.permissions, createdBy, updatedBy]")
   }
 
   async findByEmail(email: string): Promise<User> {
@@ -24,7 +24,7 @@ export class UserRepository implements Repository<string, User> {
 
   async findAll(): Promise<User[]> {
     return await this.userModel.query()
-      .withGraphFetched("*");
+      .withGraphFetched("[roles.permissions, createdBy, updatedBy]");
   }
 
 

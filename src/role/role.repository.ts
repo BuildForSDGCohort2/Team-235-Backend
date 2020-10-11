@@ -12,7 +12,7 @@ export class RoleRepository implements Repository<number, Role> {
 
     async find(id: number): Promise<Role> {
         return await this.roleModel.query().findById(id)
-        .withGraphFetched("*");
+        .withGraphFetched("[permissions, createdBy, updatedBy]");
     }
 
     async findByName(name: string): Promise<Role>{
@@ -21,7 +21,7 @@ export class RoleRepository implements Repository<number, Role> {
 
     async findAll(): Promise<Role[]> {
         return await this.roleModel.query()
-        .withGraphFetched("*");
+        .withGraphFetched("[permissions, createdBy, updatedBy]");
     }
 
     async save(role: Role): Promise<Role> {

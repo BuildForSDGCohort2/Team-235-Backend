@@ -12,7 +12,6 @@ import { JWTPayload } from "./jwt-payload.interface";
 @Injectable()
 export class AuthenticationService {
   constructor(
-    @Inject(forwardRef(() => UserService))
     private userService: UserService,
     private jwtService: JwtService,
   ) { }

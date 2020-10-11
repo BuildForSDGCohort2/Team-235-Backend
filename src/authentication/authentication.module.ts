@@ -16,7 +16,7 @@ import { UserModule } from "../user/user.module";
                 expiresIn: Number(process.env.JWT_EXPIRES_IN),
             },
         }),
-        forwardRef(() =>UserModule),
+        UserModule,
     ],
     providers: [AuthenticationService, JwtStrategy, GqlAuthGuard, AuthenticationResolver],
     exports: [JwtStrategy, PassportModule, GqlAuthGuard],
