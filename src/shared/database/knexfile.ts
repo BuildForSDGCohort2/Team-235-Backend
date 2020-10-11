@@ -35,9 +35,6 @@ module.exports = {
     ...config,
     connection: {
       connectionString: String(process.env.DATABASE_URL),
-      ssl: {
-        rejectUnauthorized: false
-      }
     }
   }
 
