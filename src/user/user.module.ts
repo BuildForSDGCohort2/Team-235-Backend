@@ -9,7 +9,7 @@ import { RoleModule } from "../role/role.module";
 
 @Module({
   imports: [
-    RoleModule,
+    forwardRef(() => RoleModule),
     ObjectionModule.forFeature([User]),
   ],
   providers: [UserResolver, UserMapper, UserService, UserRepository],
