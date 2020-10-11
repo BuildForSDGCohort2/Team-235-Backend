@@ -72,9 +72,9 @@ export class UserService {
     }
 
     async updateUser(currentUser: User, dto: UpdateUserDTO): Promise<User> {
-        if (!dto.id) {
-            throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
-        }
+        // if (!dto.id) {
+        //     throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
+        // }
         const user = await this.userRepository.find(dto.id);
         if (!user) {
             throw new BadRequestException(MessageUtil.USER_NOT_FOUND);

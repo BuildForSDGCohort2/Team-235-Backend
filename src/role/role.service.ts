@@ -63,9 +63,9 @@ export class RoleService {
 
     async update(dto: UpdateRoleDTO, currentUser: User): Promise<Role>{
     
-        if(!(dto.id)){
-            throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
-        } 
+        // if(!(dto.id)){
+        //     throw new BadRequestException(MessageUtil.INVALID_REQUEST_DATA);
+        // } 
 
         const role = await this.roleRepository.find(dto.id);
 
