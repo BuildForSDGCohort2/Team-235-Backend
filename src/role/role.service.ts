@@ -24,7 +24,7 @@ export class RoleService {
     }
 
     async getRoles(): Promise<Role[]>{
-        return []
+        return await this.roleRepository.findAll();
     }
 
     async getRoleById(id: number) {

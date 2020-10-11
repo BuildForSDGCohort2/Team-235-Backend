@@ -38,8 +38,8 @@ export class RoleResolver {
         PermissionGuard(["roles.read"])
     )
     async getRoles() {
-        //const roles = await this.roleService.getRoles();
-        return [];
+        return (await this.roleService.getRoles())
+            .map((role) => this.roleMapper.mapFromModel(role));
     }
 
     @Query(() => RoleDTO)
