@@ -6,7 +6,6 @@ import { User } from "./user.model";
 import { MessageUtil } from "../shared/util/message.util";
 import { ValidationUtil } from "../shared/util/validation.util";
 import { CreateUserDTO } from "./dto/create-user.dto";
-import { Role } from "src/role/role.model";
 import { RoleRepository } from "src/role/role.repository";
 import { UpdateUserDTO } from "./dto/update-user.dto";
 
