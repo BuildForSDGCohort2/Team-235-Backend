@@ -13,16 +13,16 @@ export class StockRepository implements Repository<number, Stock> {
 
     async find(id: number): Promise<Stock> {
         return await this.stockModel.query().findById(id)
-            .withGraphFetched("[createdBy, updatedBy]");
+            .withGraphFetched("[createdBy, updatedBy, categories]");
     }
     async findByName(name: string): Promise<Stock> {
         return await this.stockModel.query().findOne({ name })
-            .withGraphFetched("[createdBy, updatedBy]");
+            .withGraphFetched("[createdBy, updatedBy, categories]");
     }
 
     async findAll(): Promise<Stock[]> {
         return await this.stockModel.query()
-        .withGraphFetched("[createdBy, updatedBy]");
+        .withGraphFetched("[createdBy, updatedBy, categories]");
     }
 
     async save(stock: Stock): Promise<Stock> {
