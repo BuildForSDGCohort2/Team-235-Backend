@@ -47,7 +47,7 @@ export class RoleResolver {
         GqlAuthGuard,
         PermissionGuard(["roles.read"])
     )
-    async getRoleById(@Args("data") id: number) {
+    async getRoleById(@Args("id") id: number) {
         const role = await this.roleService.getRoleById(id);
         return this.roleMapper.mapFromModel(role);
     }

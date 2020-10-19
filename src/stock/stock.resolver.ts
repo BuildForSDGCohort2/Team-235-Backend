@@ -46,9 +46,7 @@ export class StockResolver {
         GqlAuthGuard,
         PermissionGuard(["stock.read"])
     )
-    async getStockById(
-        @Args("id") id: number,
-    ) {
+    async getStockById(@Args("id") id: number) {
         return await this.stockService.findById(id);
     }
 
@@ -68,7 +66,7 @@ export class StockResolver {
         GqlAuthGuard,
         PermissionGuard(["stock.read"])
     )
-    async getStocksByCategoryId(@Args("data") id: number) {
+    async getStocksByCategoryId(@Args("id") id: number) {
         return (await this.stockService.getStocksByCategoryId(id)).map((stock) => {
             return this.stockMapper.mapFromModel(stock);
         });
