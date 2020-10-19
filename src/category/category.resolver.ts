@@ -34,9 +34,7 @@ export class CategoryResolver {
         PermissionGuard(["categories.read"])
     )
 
-    async getCategoryByName(
-        @Args("name") name: string,
-    ) {
+    async getCategoryByName(@Args("name") name: string) {
         return await this.categoryService.findByName(name);
     }
 
@@ -45,9 +43,7 @@ export class CategoryResolver {
         GqlAuthGuard,
         PermissionGuard(["categories.read"])
     )
-    async getCategoryById(
-        @Args("id") id: number,
-    ) {
+    async getCategoryById(@Args("id") id: number) {
         return await this.categoryService.findById(id);
     }
 
